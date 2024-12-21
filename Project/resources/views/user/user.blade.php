@@ -45,18 +45,7 @@
       
        
 
-       @if (Route::has('login'))
-                <div class="d-flex justify-content-end">
-                    @auth
-                    <a href="{{ url('/dashboard') }}" class="btn btn-link text-dark">Dashboard</a>
-                    @else
-                    <a href="{{ route('login') }}" class="btn btn-link text-dark">Log in</a>
-                        @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="ml-4 btn btn-link text-dark">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
+       
             @include('partials.header-user')
 
        @yield('content')
@@ -71,7 +60,7 @@
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src=" {{ asset('lib/wow/wow.min.js') }}"></script>
     <script src=" {{ asset('lib/easing/easing.min.js') }}"></script>
     <script src=" {{ asset('lib/waypoints/waypoints.min.js') }}"></script>

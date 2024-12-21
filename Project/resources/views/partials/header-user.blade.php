@@ -37,21 +37,24 @@
                  </button>
                  <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                      <div class="navbar-nav mr-auto py-0">
-                         <a href="index.html" class="nav-item nav-link active">Home</a>
-                         <a href="about.html" class="nav-item nav-link">About</a>
-                         <a href="service.html" class="nav-item nav-link">Services</a>
-                         <a href="room.html" class="nav-item nav-link">Rooms</a>
-                         <div class="nav-item dropdown">
-                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                             <div class="dropdown-menu rounded-0 m-0">
-                                 <a href="booking.html" class="dropdown-item">Booking</a>
-                                 <a href="team.html" class="dropdown-item">Our Team</a>
-                                 <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                             </div>
-                         </div>
-                         <a href="contact.html" class="nav-item nav-link">Contact</a>
+                         <a href="/" class="nav-item nav-link active">Home</a>
+                         <a href="/about" class="nav-item nav-link">About</a>
+                         <a href="/room" class="nav-item nav-link">Rooms</a>
+                         <a href="booking" class="nav-item nav-link">Booking</a>
+                         <a href="contact" class="nav-item nav-link">Contact</a>
                      </div>
-                     <a href="https://htmlcodex.com/hotel-html-template-pro" class="btn btn-primary rounded-0 py-4 px-md-5 d-none d-lg-block">Premium Version<i class="fa fa-arrow-right ms-3"></i></a>
+                     @if (Route::has('login'))
+                <div class="d-flex justify-content-end">
+                    @auth
+                    <a href="{{ url('/dashboard') }}" class="btn btn-link text-dark">Dashboard</a>
+                    @else
+                    <a href="{{ route('login') }}" class="btn btn-link text-light">Log in</a>
+                        @if (Route::has('register'))
+                        <a href="{{ route('register') }}" class="ml-4 btn btn-link text-light">Register</a>
+                        @endif
+                    @endauth
+                </div>
+            @endif
                  </div>
              </nav>
          </div>
