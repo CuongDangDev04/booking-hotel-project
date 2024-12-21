@@ -44,17 +44,32 @@
                          <a href="contact" class="nav-item nav-link">Contact</a>
                      </div>
                      @if (Route::has('login'))
-                <div class="d-flex justify-content-end">
-                    @auth
-                    <a href="{{ url('/dashboard') }}" class="btn btn-link text-dark">Dashboard</a>
-                    @else
-                    <a href="{{ route('login') }}" class="btn btn-link text-light">Log in</a>
-                        @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="ml-4 btn btn-link text-light">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
+                     <div class="d-flex justify-content-end">
+                         @auth
+                         <ul class="navbar-nav ms-3 ">
+                             <li class="nav-item dropdown">
+                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                     {{ Auth::user()->name }}
+                                 </a>
+                                 <ul class="dropdown-menu " style="left: -100%;" aria-labelledby="navbarDropdown">
+                                     <li><a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Profile') }}</a></li>
+                                     <li>
+                                         <form method="POST" action="{{ route('logout') }}">
+                                             @csrf
+                                             <button class="dropdown-item" type="submit">{{ __('Log Out') }}</button>
+                                         </form>
+                                     </li>
+                                 </ul>
+                             </li>
+                         </ul>
+                         @else
+                         <a href="{{ route('login') }}" class="btn btn-link text-light">Log in</a>
+                         @if (Route::has('register'))
+                         <a href="{{ route('register') }}" class="ml-4 btn btn-link text-light">Register</a>
+                         @endif
+                         @endauth
+                     </div>
+                     @endif
                  </div>
              </nav>
          </div>
