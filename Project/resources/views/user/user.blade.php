@@ -36,11 +36,11 @@
 <body>
     <div class="container-xxl bg-white p-0">
         <!-- Spinner Start -->
-        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+        <!-- <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
                 <span class="sr-only">Loading...</span>
             </div>
-        </div>
+        </div> -->
         <!-- Spinner End -->
       
        
@@ -51,7 +51,6 @@
                     <a href="{{ url('/dashboard') }}" class="btn btn-link text-dark">Dashboard</a>
                     @else
                     <a href="{{ route('login') }}" class="btn btn-link text-dark">Log in</a>
-
                         @if (Route::has('register'))
                         <a href="{{ route('register') }}" class="ml-4 btn btn-link text-dark">Register</a>
                         @endif
@@ -59,6 +58,11 @@
                 </div>
             @endif
             @include('partials.header-user')
+
+       @yield('content')
+
+        
+        @include('partials.footer-user')
 
 
         <!-- Back to Top -->
