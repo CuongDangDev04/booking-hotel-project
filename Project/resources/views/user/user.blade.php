@@ -30,6 +30,7 @@
 
     <!-- Template Stylesheet -->
     <link href=" {{ asset('css/style.css') }}" rel="stylesheet">
+    
 </head>
 
 <body>
@@ -41,13 +42,23 @@
             </div>
         </div>
         <!-- Spinner End -->
+      
+       
 
-       @include('partials.header-user')
+       @if (Route::has('login'))
+                <div class="d-flex justify-content-end">
+                    @auth
+                    <a href="{{ url('/dashboard') }}" class="btn btn-link text-dark">Dashboard</a>
+                    @else
+                    <a href="{{ route('login') }}" class="btn btn-link text-dark">Log in</a>
 
-        @section('content')
-        
-        @include('partials.footer-user')
-        
+                        @if (Route::has('register'))
+                        <a href="{{ route('register') }}" class="ml-4 btn btn-link text-dark">Register</a>
+                        @endif
+                    @endauth
+                </div>
+            @endif
+            @include('partials.header-user')
 
 
         <!-- Back to Top -->
