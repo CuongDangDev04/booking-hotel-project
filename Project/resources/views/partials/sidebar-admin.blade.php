@@ -23,7 +23,7 @@
                 <span>Quản lí người dùng</span>
             </a>
         </li>
-       
+
         <li class="nav-item">
             <a href="quanlydanhmuc">
                 <i class="fas fa-folder"></i>
@@ -39,12 +39,13 @@
     </ul>
 </div>
 <style>
-    *{
-        font-family:  sans-serif;
+    * {
+        font-family: sans-serif;
     }
+
     .sidebar {
         width: 250px;
-        background-color: #1F2937;
+        background-color: #101d3d;
         color: white;
         height: 100vh;
         position: fixed;
