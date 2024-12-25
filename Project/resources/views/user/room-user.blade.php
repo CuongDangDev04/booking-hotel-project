@@ -24,7 +24,8 @@
                <div class="bg-white shadow" style="padding: 35px;">
                    <div class="row g-2">
                        <div class="col-md-10">
-                           <div class="row g-2">
+
+                           <form class="row g-2" action="{{ route('find.rooms') }}" method="GET">
                                <div class="col-md-3">
                                    <div class="date" id="date1" data-target-input="nearest">
                                        <input type="text" class="form-control datetimepicker-input"
@@ -52,7 +53,7 @@
                                        <option value="3">Child 3</option>
                                    </select>
                                </div>
-                           </div>
+                           </form>
                        </div>
                        <div class="col-md-2">
                            <button class="btn btn-primary w-100">Submit</button>
