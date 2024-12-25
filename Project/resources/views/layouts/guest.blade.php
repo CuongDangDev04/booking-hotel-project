@@ -14,7 +14,8 @@
         <!-- Scripts -->
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link href=" {{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    @vite('resources/css/bootstrap.min.css')
+
     </head>
     <body class="bg-light text-dark">
     <div class="min-vh-100 d-flex flex-column justify-content-center align-items-center pt-5 bg-light dark:bg-dark">

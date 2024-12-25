@@ -1,7 +1,8 @@
 <div class="sidebar active">
     <div class="sidebar-logo">
         <a href="/admin" class="logo">
-            <img src="{{ Vite::asset('resources/img/logo.png') }}" alt="Logo" class="navbar-brand" height="50px" />
+        <img src="{{ asset('img/logo.png') }}" alt="Logo" class="navbar-brand" height="50px" />
+
         </a>
     </div>
     <ul class="nav">

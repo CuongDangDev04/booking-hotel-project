@@ -21,16 +21,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    @vite('resources/lib/animate/animate.min.css')
-    @vite('resources/lib/animate/animate.min.css')
-    @vite('resources/lib/owlcarousel/assets/owl.carousel.min.css')
-    @vite(['resources/css/animate.min.css', 'resources/css/owl.carousel.min.css', 'resources/css/tempusdominus-bootstrap-4.min.css'])
+    <!-- Các thư viện CSS cần thiết, như animate và owl carousel -->
+    <link href=" {{ asset('lib/animate/animate.min.css') }}" rel="stylesheet">
+    <link href=" {{ asset('lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
+    <link href=" {{ asset('lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet" />
 
-    <!-- Customized Bootstrap Stylesheet -->
+    <!-- Tệp Bootstrap CSS -->
     @vite('resources/css/bootstrap.min.css')
 
-    <!-- Template Stylesheet -->
+    <!-- Tệp CSS của template hoặc tùy chỉnh của bạn -->
     @vite('resources/css/style.css')
+
 
 </head>
 
@@ -61,10 +62,19 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Libraries Javascript -->
-    @vite(['resources/js/lib/wow.min.js', 'resources/js/lib/easing.min.js', 'resources/js/lib/waypoints.min.js', 'resources/js/lib/counterup.min.js', 'resources/js/lib/owl.carousel.min.js', 'resources/js/lib/moment.min.js', 'resources/js/lib/moment-timezone.min.js', 'resources/js/lib/tempusdominus-bootstrap-4.min.js'])
+    <script src=" {{ asset('lib/wow/wow.min.js') }}"></script>
+    <script src=" {{ asset('lib/easing/easing.min.js') }}"></script>
+    <script src=" {{ asset('lib/waypoints/waypoints.min.js') }}"></script>
+    <script src=" {{ asset('lib/counterup/counterup.min.js') }}"></script>
+    <script src=" {{ asset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
+    <script src=" {{ asset('lib/tempusdominus/js/moment.min.js') }}"></script>
+    <script src=" {{ asset('lib/tempusdominus/js/moment-timezone.min.js') }}"></script>
+    <script src=" {{ asset('lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+
+
+    @vite('resources/js/main.js')
 
     <!-- Template Javascript -->
-    @vite('resources/js/main.js')
 </body>
 
 </html>
