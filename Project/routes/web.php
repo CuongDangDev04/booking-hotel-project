@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\RoomControler;
+use App\Http\Controllers\User\RoomController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,9 +26,9 @@ Route::get('/about', function () {
 Route::get('/contact', function () {
     return view('user.contact-user');
 });
-Route::get('/room', function () {
-    return view('user.room-user');
-});
+Route::get('/room', [RoomController::class, 'index']);
+Route::get('/find-rooms', [RoomController::class, 'findAvailableRooms'])->name('find.rooms');
+
 Route::get('/booking', function () {
     return view('user.booking-user');
 });
@@ -41,4 +43,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
