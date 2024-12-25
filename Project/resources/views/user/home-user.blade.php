@@ -267,11 +267,15 @@
                   </div>
               </div>
               <div class="col-md-6">
-                  <div class="video">
-                      <button type="button" class="btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/DWRcNpR6Kdc" data-bs-target="#videoModal">
+                  <div class="video" style=" background: linear-gradient(rgba(15, 23, 43, 0.1), rgba(15, 23, 43, 0.1)), url('{{ asset('img/video.jpg') }}');">
+                      <button type="button" class="btn-play"
+                          data-bs-toggle="modal"
+                          data-src="https://www.youtube.com/embed/DWRcNpR6Kdc"
+                          data-bs-target="#videoModal">
                           <span></span>
                       </button>
                   </div>
+
               </div>
           </div>
       </div>
