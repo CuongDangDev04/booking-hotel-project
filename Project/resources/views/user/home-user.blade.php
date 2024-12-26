@@ -46,32 +46,32 @@
       <div class="container-fluid booking pb-5 wow fadeIn" data-wow-delay="0.1s">
           <div class="container">
               <div class="bg-white shadow" style="padding: 35px;">
-                  <div class="row g-2">
+                  <form class="row g-2" action="{{ route('find.rooms') }}" method="GET">
                       <div class="col-md-10">
+
                           <div class="row g-2">
                               <div class="col-md-3">
                                   <div class="date" id="date1" data-target-input="nearest">
-                                      <input type="date" class="form-control datetimepicker-input"
-                                          placeholder="Check in" data-target="#date1" data-toggle="datetimepicker"
-                                          min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" />
+                                      <input type="date" name="checkin" class="form-control datetimepicker-input"
+                                          placeholder="Check in" data-target="#date1" data-toggle="datetimepicker" min={{$today}} />
                                   </div>
                               </div>
                               <div class="col-md-3">
                                   <div class="date" id="date2" data-target-input="nearest">
-                                      <input type="date" class="form-control datetimepicker-input" placeholder="Check out" data-target="#date2" data-toggle="datetimepicker" min="{{ \Carbon\Carbon::now()->format('Y-m-d') }}" />
+                                      <input type="date" name="checkout" class="form-control datetimepicker-input" placeholder="Check out" data-target="#date2" data-toggle="datetimepicker" min={{$today}} />
                                   </div>
                               </div>
                               <div class="col-md-3">
-                                  <select class="form-select">
-                                      <option selected>Adult</option>
+                                  <select class="form-select" name="adults">
+                                      <option selected value="0">Adult</option>
                                       <option value="1">Adult 1</option>
                                       <option value="2">Adult 2</option>
                                       <option value="3">Adult 3</option>
                                   </select>
                               </div>
                               <div class="col-md-3">
-                                  <select class="form-select">
-                                      <option selected>Child</option>
+                                  <select class="form-select" name="children">
+                                      <option selected value="0">Child</option>
                                       <option value="1">Child 1</option>
                                       <option value="2">Child 2</option>
                                       <option value="3">Child 3</option>
@@ -80,9 +80,9 @@
                           </div>
                       </div>
                       <div class="col-md-2">
-                          <button class="btn btn-primary w-100">Submit</button>
+                          <button type="submit" class="btn btn-primary w-100">Submit</button>
                       </div>
-                  </div>
+                  </form>
               </div>
           </div>
       </div>
