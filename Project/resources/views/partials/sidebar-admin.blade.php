@@ -22,19 +22,7 @@
             </a>
         </li>
 
-        <li class="nav-item">
-            <a href="quanlydanhmuc">
-                <i class="fas fa-folder"></i>
-                <span>Quản lí danh mục</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="contact">
-                <i class="fas fa-envelope"></i>
-                <span>Liên hệ</span>
-            </a>
-        </li>
-    </ul>
+      
 </div>
 <style>
     * {

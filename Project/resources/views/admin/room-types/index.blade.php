@@ -6,7 +6,6 @@
 <div class="container">
     <h1 class="mb-4 title-manager-room">Quản lý danh sách các phòng</h1>
 
-    <!-- Button to open "Create Room Type" Modal -->
     <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#createRoomTypeModal">
         Thêm Phòng Mới
     </button>
@@ -150,7 +149,6 @@
 @endsection
 
 <style>
-    /* Định dạng chung cho form */
     .title-manager-room{
         font-size: 42px;
         font-weight: bold;
@@ -219,12 +217,10 @@
         color: #000;
     }
 
-    /* Ẩn icon khi chưa sắp xếp */
     th a i {
         display: none;
     }
 
-    /* Hiển thị icon mũi tên khi sắp xếp */
     th a[aria-sort="ascending"] i.fa-arrow-up {
         display: inline-block;
     }
@@ -234,7 +230,6 @@
     }
 </style>
 
-<!-- Thêm Font Awesome CDN -->
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <script>
     function deleteRoomType(roomTypeId) {
@@ -247,7 +242,6 @@
             cancelButtonText: 'Hủy'
         }).then((result) => {
             if (result.isConfirmed) {
-                // Nếu người dùng đồng ý xóa, thực hiện gửi form
                 document.getElementById('delete-form-' + roomTypeId).submit();
             }
         });

@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Hash as FacadesHash;
 
 class AdminUserController extends Controller
 {
-    // AdminUserController.php
     public function index(Request $request)
     {
         $sortBy = $request->get('sort_by', 'name');
@@ -40,10 +39,8 @@ class AdminUserController extends Controller
                 'role' => $request->role ?? 'user',
             ]);
 
-            // Gửi thông báo thành công về session
             return redirect()->route('admin.users.index')->with('success', 'Người dùng đã được thêm!');
         } catch (\Exception $e) {
-            // Gửi thông báo lỗi về session
             return redirect()->route('admin.users.index')->with('error', 'Có lỗi xảy ra. Vui lòng thử lại!');
         }
     }
@@ -68,10 +65,8 @@ class AdminUserController extends Controller
                 'role' => $request->role ?? $user->role,
             ]);
 
-            // Gửi thông báo thành công về session
             return redirect()->route('admin.users.index')->with('success', 'Người dùng đã được cập nhật!');
         } catch (\Exception $e) {
-            // Gửi thông báo lỗi về session
             return redirect()->route('admin.users.index')->with('error', 'Có lỗi xảy ra. Vui lòng thử lại!');
         }
     }
@@ -82,10 +77,8 @@ class AdminUserController extends Controller
             $user = User::findOrFail($id);
             $user->delete();
 
-            // Gửi thông báo thành công về session
             return redirect()->route('admin.users.index')->with('success', 'Người dùng đã được xóa!');
         } catch (\Exception $e) {
-            // Gửi thông báo lỗi về session
             return redirect()->route('admin.users.index')->with('error', 'Có lỗi xảy ra. Vui lòng thử lại!');
         }
     }
@@ -97,10 +90,8 @@ class AdminUserController extends Controller
             $user->is_active = !$user->is_active;
             $user->save();
 
-            // Gửi thông báo thành công về session
             return redirect()->route('admin.users.index')->with('success', $user->is_active ? 'Tài khoản đã được kích hoạt!' : 'Tài khoản đã bị vô hiệu hóa!');
         } catch (\Exception $e) {
-            // Gửi thông báo lỗi về session
             return redirect()->route('admin.users.index')->with('error', 'Có lỗi xảy ra. Vui lòng thử lại!');
         }
     }
