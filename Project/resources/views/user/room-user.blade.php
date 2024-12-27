@@ -79,7 +79,7 @@
                        <div class="room-item shadow rounded overflow-hidden">
                            <div class="position-relative">
                                <img class="img-fluid" src="img/room-1.jpg" alt="">
-                               <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">{{$room->price}}/Night</small>
+                               <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">{{$room->price}}/Day</small>
                            </div>
                            <div class="p-4 mt-2">
                                <div class="d-flex justify-content-between mb-3">
@@ -103,7 +103,7 @@
                                </div>
                                <p class="text-body mb-3 room-description">{{$room->description}}</p>
                                <div class="d-flex justify-content-between">
-                                   <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">View Detail</a>
+                                   <a class="btn btn-sm btn-primary rounded py-2 px-4" href="{{ route('room.show', ['room' => $room->roomType_id]) }}">View Detail</a>
                                    <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
                                </div>
                            </div>

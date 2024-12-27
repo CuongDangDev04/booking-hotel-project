@@ -79,4 +79,12 @@ class RoomController extends Controller
         ]);
         // return redirect('/');
     }
+
+    public function show($roomType_id)
+    {
+        $roomType = RoomType::with('services')->find($roomType_id);
+        return view('user.detail_room-user', [
+            'roomType' => $roomType
+        ]);
+    }
 }
