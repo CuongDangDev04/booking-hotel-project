@@ -1,9 +1,6 @@
 <div class="sidebar active">
     <div class="sidebar-logo">
-        <a href="/admin" class="logo">
-        <img src="{{ asset('img/logo.png') }}" alt="Logo" class="navbar-brand" height="50px" />
 
-        </a>
     </div>
     <ul class="nav">
         <li class="nav-item">
@@ -13,13 +10,13 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="quanlykhoahoc">
+            <a href="room-types">
                 <i class="far fa-chart-bar"></i>
                 <span>Quản lí phòng</span>
             </a>
         </li>
         <li class="nav-item">
-            <a href="quanlynguoidung">
+            <a href="users">
                 <i class="fas fa-users"></i>
                 <span>Quản lí người dùng</span>
             </a>
@@ -53,7 +50,6 @@
         top: 0;
         left: -250px;
         transition: left 0.3s ease;
-        z-index: 9999;
         box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
     }
 
@@ -82,10 +78,11 @@
         list-style: none;
         padding: 0;
         margin: 0;
-        margin-top: 40px;
+        margin-top: 60px;
     }
 
     .nav-item {
+
         padding: 19px 20px;
         display: flex;
         align-items: center;

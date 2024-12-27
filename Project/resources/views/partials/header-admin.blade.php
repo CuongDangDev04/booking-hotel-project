@@ -1,97 +1,15 @@
-<nav class="navbar" style="background-color: #0F172B">
+<nav class="navbar2" style="background-color: #0F172B">
+    <a href="/admin" class="logo">
+        <img src="{{ asset('img/logo.png') }}" alt="Logo" class="navbar2-br height="50px" />
+
+    </a>
     @auth
 
     <form method="POST" action="{{ route('logout') }}">
         @csrf
-        <button class="btn-logout" type="submit">{{ __('Log Out') }}</button>
+        <button class="btn-logout" type="submit">{{ __('Đăng xuất') }}</button>
     </form>
 
 
     @endif
 </nav>
-<style>
-    .btn-logout {
-        font-size: 18px;
-        text-decoration: none;
-        cursor: pointer;
-        transition: color 0.3s;
-        background-color: #ff4d4d;
-        border: none;
-        color: white;
-        width: 125px;
-        height: 40px;
-        margin-right: 45px;
-        border-radius: 4px;
-        font-weight: bold;
-
-    }
-
-    .btn-logout:hover {
-        color: #0F172B;
-
-    }
-
-    .navbar {
-        width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        height: 77px;
-        background-color: #0F172B;
-        position: fixed;
-        top: 0;
-        z-index: 1;
-        padding-right: 20px;
-    }
-
-    .navbar-nav {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        align-items: center;
-    }
-
-    .nav-item {
-        margin-left: 20px;
-        display: flex;
-        align-items: center;
-    }
-
-    .profile-username {
-        display: flex;
-        align-items: center;
-        color: #fff;
-        font-size: 16px;
-        font-weight: bold;
-    }
-
-    .username {
-        margin-right: 10px;
-    }
-
-    .logout-btn {
-        color: #fff;
-        font-size: 18px;
-        text-decoration: none;
-        cursor: pointer;
-        transition: color 0.3s;
-    }
-
-    .logout-btn:hover {
-        color: #ff4d4d;
-    }
-
-    /* Media query for small screens */
-    @media (max-width: 768px) {
-        .navbar {
-            position: relative;
-            justify-content: space-between;
-            padding-right: 15px;
-        }
-
-        .navbar-nav {
-            display: flex;
-        }
-    }
-</style>

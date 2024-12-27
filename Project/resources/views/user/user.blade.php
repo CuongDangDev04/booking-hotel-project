@@ -25,6 +25,8 @@
     <link href=" {{ asset('lib/animate/animate.min.css') }}" rel="stylesheet">
     <link href=" {{ asset('lib/owlcarousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
     <link href=" {{ asset('lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet" />
+    <!-- Thêm CSS của Toastr -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet">
 
     <!-- Tệp Bootstrap CSS -->
     @vite('resources/css/bootstrap.min.css')
@@ -32,10 +34,16 @@
     <!-- Tệp CSS của template hoặc tùy chỉnh của bạn -->
     @vite('resources/css/style.css')
 
+    <!-- Thêm CSS SweetAlert2 -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.21/dist/sweetalert2.min.css" rel="stylesheet">
 
 </head>
 
 <body>
+    <!-- Thêm JS SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.21/dist/sweetalert2.all.min.js"></script>
+
+
     <!-- Spinner Start -->
     <!-- <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
@@ -45,6 +53,16 @@
     <!-- Spinner End -->
 
 
+    @if(session('error'))
+    <script>
+        Swal.fire({
+            title: 'Lỗi!',
+            text: "{{ session('error') }}",
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    </script>
+    @endif
 
 
     @include('partials.header-user')
@@ -53,6 +71,8 @@
 
 
     @include('partials.footer-user')
+
+
 
 
     <!-- Back to Top -->

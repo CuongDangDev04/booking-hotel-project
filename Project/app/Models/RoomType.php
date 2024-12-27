@@ -12,7 +12,7 @@ class RoomType extends Model
 
     protected $primaryKey = 'roomType_id';
 
-    protected $fillable = ['name', 'description', 'price', 'occupancy', 'rating'];
+    protected $fillable = ['name', 'description', 'price', 'occupancy'];
     public function rooms()
     {
         return $this->hasMany(Room::class, 'roomType_id');

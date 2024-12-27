@@ -1,0 +1,255 @@
+@extends('admin.dashboard')
+
+@section('title', 'Quản lí phòng')
+
+@section('content')
+<div class="container">
+    <h1 class="mb-4 title-manager-room">Quản lý danh sách các phòng</h1>
+
+    <!-- Button to open "Create Room Type" Modal -->
+    <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#createRoomTypeModal">
+        Thêm Phòng Mới
+    </button>
+
+    <table class="table table-bordered table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>
+                    <a>
+                        ID
+
+                    </a>
+                </th>
+                <th>
+                    <a href="{{ route('admin.room-types.index', ['sort_by' => 'name', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
+                        Tên
+                        <i class="fa fa-arrow-up"></i>
+                        <i class="fa fa-arrow-down"></i>
+                    </a>
+                </th>
+                <th>
+                    <a href="{{ route('admin.room-types.index', ['sort_by' => 'price', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
+                        Giá
+                        <i class="fa fa-arrow-up"></i>
+                        <i class="fa fa-arrow-down"></i>
+                    </a>
+                </th>
+                <th>
+                    <a href="{{ route('admin.room-types.index', ['sort_by' => 'occupancy', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
+                        Số Người
+                        <i class="fa fa-arrow-up"></i>
+                        <i class="fa fa-arrow-down"></i>
+                    </a>
+                </th>
+                <th>Mô tả</th>
+                <th>Hành Động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($roomTypes as $roomType)
+            <tr>
+                <td>{{ $roomType->roomType_id }}</td>
+                <td>{{ $roomType->name }}</td>
+                <td>{{ $roomType->price }}</td>
+                <td>{{ $roomType->occupancy }}</td>
+                <td>{{ $roomType->description }}</td>
+                <td>
+                    <!-- Edit Button -->
+                    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editRoomTypeModal{{ $roomType->roomType_id }}">
+                        Sửa
+                    </button>
+
+                    <form action="{{ route('admin.room-types.destroy', $roomType->roomType_id) }}" method="POST" style="display:inline-block;" id="delete-form-{{ $roomType->roomType_id }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" class="btn btn-danger btn-sm" onclick="deleteRoomType('{{ $roomType->roomType_id }}')">Xóa</button>
+
+                    </form>
+
+                </td>
+            </tr>
+
+            <!-- Edit Modal -->
+            <div class="modal fade" id="editRoomTypeModal{{ $roomType->roomType_id }}" tabindex="-1" aria-labelledby="editRoomTypeModalLabel{{ $roomType->roomType_id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form action="{{ route('admin.room-types.update', $roomType->roomType_id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <div class="modal-header">
+                                <h5 class="modal-title">Chỉnh Sửa Loại Phòng</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Tên</label>
+                                    <input type="text" name="name" class="form-control" id="name" value="{{ old('name', $roomType->name) }}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="description" class="form-label">Mô Tả</label>
+                                    <textarea name="description" class="form-control" id="description">{{ old('description', $roomType->description) }}</textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="price" class="form-label">Giá</label>
+                                    <input type="number" name="price" class="form-control" value="{{ old('price', $roomType->price) }}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="occupancy" class="form-label">Số Người</label>
+                                    <input type="number" name="occupancy" class="form-control" value="{{ old('occupancy', $roomType->occupancy) }}" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                <button type="submit" class="btn btn-primary">Lưu Thay Đổi</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+
+<!-- Create Modal -->
+<div class="modal fade" id="createRoomTypeModal" tabindex="-1" aria-labelledby="createRoomTypeModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('admin.room-types.store') }}" method="POST">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title">Thêm Loại Phòng Mới</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Tên</label>
+                        <input type="text" name="name" class="form-control" id="name" value="{{ old('name') }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Mô Tả</label>
+                        <textarea name="description" class="form-control" id="description">{{ old('description') }}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Giá</label>
+                        <input type="number" name="price" class="form-control" id="price" value="{{ old('price') }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="occupancy" class="form-label">Số Người</label>
+                        <input type="number" name="occupancy" class="form-control" id="occupancy" value="{{ old('occupancy') }}" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="submit" class="btn btn-primary">Lưu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endsection
+
+<style>
+    /* Định dạng chung cho form */
+    .title-manager-room{
+        font-size: 42px;
+        font-weight: bold;
+    }
+    .container {
+        margin-top: 50px;
+    }
+
+    .table {
+        font-family: 'Arial', sans-serif;
+        font-size: 14px;
+    }
+
+    .table-dark {
+        background-color: #343a40;
+    }
+
+    .table th,
+    .table td {
+        vertical-align: middle;
+        text-align: center;
+    }
+
+    th a {
+        color: white;
+        text-decoration: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    th a:hover {
+        text-decoration: underline;
+    }
+
+    th i {
+        margin-left: 5px;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    td {
+        vertical-align: middle;
+    }
+
+    .btn {
+        font-size: 14px;
+    }
+
+    .modal-header {
+        background-color: #f8f9fa;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        padding: 8px;
+    }
+
+    .btn-close {
+        background-color: transparent;
+        border: none;
+        color: #000;
+    }
+
+    /* Ẩn icon khi chưa sắp xếp */
+    th a i {
+        display: none;
+    }
+
+    /* Hiển thị icon mũi tên khi sắp xếp */
+    th a[aria-sort="ascending"] i.fa-arrow-up {
+        display: inline-block;
+    }
+
+    th a[aria-sort="descending"] i.fa-arrow-down {
+        display: inline-block;
+    }
+</style>
+
+<!-- Thêm Font Awesome CDN -->
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+<script>
+    function deleteRoomType(roomTypeId) {
+        Swal.fire({
+            title: 'Bạn có chắc chắn muốn xóa loại phòng này?',
+            text: 'Thao tác này không thể hoàn tác!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Xóa',
+            cancelButtonText: 'Hủy'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Nếu người dùng đồng ý xóa, thực hiện gửi form
+                document.getElementById('delete-form-' + roomTypeId).submit();
+            }
+        });
+    }
+</script>

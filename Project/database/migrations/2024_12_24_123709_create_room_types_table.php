@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('description')->nullable(); // Mô tả
             $table->decimal('price', 10, 2); // Giá mỗi đêm
             $table->integer('occupancy'); // Số người tối đa
-            $table->integer('rating')->default(0); // Đánh giá
+            $table->integer('rating')->default(0) ->nullable(); // Đánh giá
             $table->timestamps(); // created_at, updated_at
         });
     }

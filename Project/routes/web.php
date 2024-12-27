@@ -1,7 +1,8 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminRoomTypeController;
+use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\User\RoomControler;
 use App\Http\Controllers\User\RoomController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('user.home-user');
-});
+}) ->name('home');
 Route::get('/about', function () {
     return view('user.about-user');
 });
@@ -35,12 +36,28 @@ Route::get('/booking', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified','check.active'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth','check.active' )->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
 require __DIR__ . '/auth.php';
+
+
+
+Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
+    Route::resource('room-types', AdminRoomTypeController::class);
+});
+
+
+
+Route::prefix('admin')->name('admin.')->group(function() {
+    Route::resource('users', AdminUserController::class);
+});
+Route::get('/admin/users/{id}/toggle-active', [AdminUserController::class, 'toggleActiveStatus'])->name('admin.users.toggleActiveStatus');
+
+
+
+
