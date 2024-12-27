@@ -22,43 +22,43 @@
        <div class="container-fluid booking pb-5 wow fadeIn" data-wow-delay="0.1s">
            <div class="container">
                <div class="bg-white shadow" style="padding: 35px;">
-                   <div class="row g-2">
+                   <form class="row g-2" action="{{ route('find.rooms') }}" method="GET">
                        <div class="col-md-10">
 
-                           <form class="row g-2" action="{{ route('find.rooms') }}" method="GET">
+                           <div class="row g-2">
                                <div class="col-md-3">
                                    <div class="date" id="date1" data-target-input="nearest">
-                                       <input type="text" class="form-control datetimepicker-input"
-                                           placeholder="Check in" data-target="#date1" data-toggle="datetimepicker" />
+                                       <input type="date" name="checkin" class="form-control datetimepicker-input"
+                                           placeholder="Check in" data-target="#date1" data-toggle="datetimepicker" min={{$today}} />
                                    </div>
                                </div>
                                <div class="col-md-3">
                                    <div class="date" id="date2" data-target-input="nearest">
-                                       <input type="text" class="form-control datetimepicker-input" placeholder="Check out" data-target="#date2" data-toggle="datetimepicker" />
+                                       <input type="date" name="checkout" class="form-control datetimepicker-input" placeholder="Check out" data-target="#date2" data-toggle="datetimepicker" min={{$today}} />
                                    </div>
                                </div>
                                <div class="col-md-3">
-                                   <select class="form-select">
-                                       <option selected>Adult</option>
+                                   <select class="form-select" name="adults">
+                                       <option selected value="0">Adult</option>
                                        <option value="1">Adult 1</option>
                                        <option value="2">Adult 2</option>
                                        <option value="3">Adult 3</option>
                                    </select>
                                </div>
                                <div class="col-md-3">
-                                   <select class="form-select">
-                                       <option selected>Child</option>
+                                   <select class="form-select" name="children">
+                                       <option selected value="0">Child</option>
                                        <option value="1">Child 1</option>
                                        <option value="2">Child 2</option>
                                        <option value="3">Child 3</option>
                                    </select>
                                </div>
-                           </form>
+                           </div>
                        </div>
                        <div class="col-md-2">
-                           <button class="btn btn-primary w-100">Submit</button>
+                           <button type="submit" class="btn btn-primary w-100">Submit</button>
                        </div>
-                   </div>
+                   </form>
                </div>
            </div>
        </div>
@@ -79,7 +79,7 @@
                        <div class="room-item shadow rounded overflow-hidden">
                            <div class="position-relative">
                                <img class="img-fluid" src="img/room-1.jpg" alt="">
-                               <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">{{$room->price}}/Night</small>
+                               <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">{{$room->price}}/Day</small>
                            </div>
                            <div class="p-4 mt-2">
                                <div class="d-flex justify-content-between mb-3">
@@ -101,9 +101,9 @@
                                    @endif
                                    @endforeach
                                </div>
-                               <p class="text-body mb-3">{{$room->description}}</p>
+                               <p class="text-body mb-3 room-description">{{$room->description}}</p>
                                <div class="d-flex justify-content-between">
-                                   <a class="btn btn-sm btn-primary rounded py-2 px-4" href="">View Detail</a>
+                                   <a class="btn btn-sm btn-primary rounded py-2 px-4" href="{{ route('room.show', ['room' => $room->roomType_id]) }}">View Detail</a>
                                    <a class="btn btn-sm btn-dark rounded py-2 px-4" href="">Book Now</a>
                                </div>
                            </div>
@@ -116,11 +116,11 @@
                        {{-- Nút Previous --}}
                        @if ($currentPage > 1)
                        <li class="page-item">
-                           <a class="page-link" href="?page={{ $currentPage - 1 }}">Previous</a>
+                           <a class="page-link prev-btn" href="?page={{ $currentPage - 1 }}">Previous</a>
                        </li>
                        @else
                        <li class="page-item disabled">
-                           <span class="page-link">Previous</span>
+                           <span class="page-link prev-btn">Previous</span>
                        </li>
                        @endif
 
@@ -134,11 +134,11 @@
                            {{-- Nút Next --}}
                            @if ($currentPage < $pages)
                                <li class="page-item">
-                               <a class="page-link" href="?page={{ $currentPage + 1 }}">Next</a>
+                               <a class="page-link next-btn" href="?page={{ $currentPage + 1 }}">Next</a>
                                </li>
                                @else
                                <li class="page-item disabled">
-                                   <span class="page-link">Next</span>
+                                   <span class="page-link next-btn">Next</span>
                                </li>
                                @endif
                    </ul>

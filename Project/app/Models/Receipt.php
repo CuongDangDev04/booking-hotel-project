@@ -14,9 +14,10 @@ class Receipt extends Model
 
     protected $fillable = ['issueDate', 'totalAmount', 'status', 'payment_id'];
 
-    public function booking()
+    public function bookings()
     {
-        return $this->belongsTo(Booking::class, 'booking_id');
+        return $this->belongsToMany(Booking::class, 'detail_receipts', 'receipt_id', 'booking_id')
+            ->withTimestamps();
     }
 
     public function payment()

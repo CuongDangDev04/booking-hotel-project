@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminRoomTypeController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\BookingController;
 use App\Http\Controllers\User\RoomController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,11 +30,11 @@ Route::get('/contact', function () {
 });
 Route::get('/room', [RoomController::class, 'index']);
 Route::get('/find-rooms', [RoomController::class, 'findAvailableRooms'])->name('find.rooms');
-
+Route::get('/room/{room}', [RoomController::class, 'show'])->name('room.show');
 Route::get('/booking', function () {
     return view('user.booking-user');
 });
-
+Route::post('/booking', [BookingController::class, 'bookingRoom'])->name('booking.room');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified','check.active'])->name('dashboard');

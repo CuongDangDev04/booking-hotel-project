@@ -102,3 +102,7 @@
         },
     });
 })(jQuery);
+
+function toggleRoomInfo() {
+    $(".room-info").toggle();
+}

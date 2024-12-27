@@ -11,7 +11,7 @@ class Booking extends Model
     protected $table = 'bookings';
 
     protected $primaryKey = 'booking_id';
-    protected $fillable = ['customer_id', 'room_id', 'user_id', 'checkin', 'checkout', 'totalPrice', 'status'];
+    protected $fillable = ['customer_id', 'room_id', 'user_id', 'checkin', 'checkout', 'adults', 'children', 'totalPrice', 'status'];
 
     public function customer()
     {
@@ -28,8 +28,10 @@ class Booking extends Model
         return $this->belongsTo(User::class, 'id');
     }
 
-    public function receipt()
+    public function receipts()
     {
-        return $this->hasOne(Receipt::class, 'booking_id');
+        return $this->belongsToMany(Receipt::class, 'detail_receipts', 'booking_id', 'receipt_id')
+            ->withPivot('price') // Nếu bạn có cột bổ sung trong bảng trung gian
+            ->withTimestamps(); // Nếu bạn có cột `created_at`, `updated_at` trong bảng trung gian
     }
 }

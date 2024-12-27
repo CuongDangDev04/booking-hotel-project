@@ -481,3 +481,14 @@
     padding-right: 0;
     border-right: none;
 }
+
+.room-description {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.prev-btn,
+.next-btn {
+    min-width: 90px; /* Đặt kích thước tối thiểu cho các nút */
+    text-align: center; /* Căn giữa văn bản */
+}

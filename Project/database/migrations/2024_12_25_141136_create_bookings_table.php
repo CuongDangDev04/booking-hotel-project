@@ -18,6 +18,8 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->datetime('checkin');
             $table->datetime('checkout');
+            $table->integer('adults');
+            $table->integer('children');
             $table->decimal('totalPrice', 10, 2);
             $table->boolean('status')->default(0);
             $table->timestamps();
