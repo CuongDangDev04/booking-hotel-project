@@ -75,10 +75,15 @@
         background-color: #cc7a00;
     }
 
+    .card {
+        border-radius: 10px;
+    }
+
     .footer {
         margin-top: 5rem !important;
     }
 </style>
+
 <div class="container mt-5 mb-5">
     <div class="row">
         <div class="col-md-8">
@@ -124,40 +129,79 @@
                 </table>
             </div>
         </div>
-        <script>
-            function toggleRoomInfo() {
-                $(".room-info-table").toggle();
-            }
 
-            function toggleRoomService() {
-                $(".room-service-table").toggle();
-            }
-        </script>
         <div class="col-md-4">
             <h1 class="mb-3">{{ $roomType->name }}</h1>
             <p>{{$roomType->description}}</p>
+            @if($errors->any())
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <ul class="m-0 list-unstyled">
+                    @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
             <div class="booking-form">
                 <h4>Book This Room</h4>
-                <form action="/book-room" method="POST">
+                <form action="{{route('booking.room')}}" method="POST">
                     @csrf <!-- Laravel CSRF token -->
+                    <input type="hidden" name="room_id" value="{{$roomType->roomType_id}}">
                     <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" required>
+                        <label for="firstname" class="form-label">Tên</label>
+                        <input type="text" id="firstname" name="firstname" class="form-control" placeholder="Enter your firstname" value="{{ old('firstname') }}" require>
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastname" class="form-label">Họ</label>
+                        <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Enter your lastname" value="{{ old('lastname') }}">
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+                        <input type="text" id="email" name="email" class="form-control" placeholder="Enter your email" value="{{ old('email') }}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="check_in" class="form-label">Check-in Date</label>
-                        <input type="date" id="check_in" name="check_in" class="form-control" required>
+                        <label for="phone" class="form-label">Điện thoại</label>
+                        <input type="text" id="phone" name="phone" class="form-control" placeholder="Enter your phone" value="{{ old('phone') }}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="guest_count" class="form-label">Number of Guests</label>
-                        <input type="number" id="guest_count" name="guest_count" class="form-control" min="1" max="{{ $roomType->capacity }}" required>
+                        <label for="address" class="form-label">Địa chỉ</label>
+                        <input type="text" id="address" name="address" class="form-control" placeholder="Enter your address" value="{{ old('address') }}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="checkin" class="form-label">Ngày nhận phòng</label>
+                        <input type="date" id="check_in" name="checkin" class="form-control" min={{$today}} value="{{ old('checkin') }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="checkout" class="form-label">Ngày trả phòng</label>
+                        <input type="date" id="check_out" name="checkout" class="form-control" min={{$today}} value="{{ old('checkout') }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="totalRoom" class="form-label">Số lượng phòng</label>
+                        <input type="number" id="totalRoom" name="totalRoom" class="form-control" value="{{ old('totalRoom') }}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="adults" class="form-label">Số Khách</label>
+                        <select class="form-select" name="adults" value="{{ old('adults') }}">
+                            <option selected value="0">Người lớn</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <select class="form-select" name="children" value="{{ old('children') }}">
+                            <option selected value="0">Trẻ em</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-warning w-100">Confirm Booking</button>
                 </form>
+
             </div>
         </div>
     </div>
@@ -171,13 +215,18 @@
                     <textarea id="comment" name="comment" class="form-control" rows="3" required></textarea>
                 </div>
                 <style>
-                    .star {
+                    .star,
+                    .star-disable {
                         font-size: 2rem;
                         cursor: pointer;
                         color: #ddd;
                         /* Màu mặc định của sao (xám nhạt) */
                         transition: color 0.2s ease-in-out;
                         /* Thêm hiệu ứng mượt mà khi thay đổi màu */
+                    }
+
+                    .card-rating {
+                        user-select: none;
                     }
 
                     .star:hover,
@@ -246,14 +295,44 @@
                 <h4>All Comments</h4>
                 <div class="card mb-3">
                     <div class="card-body">
-                        <h5 class="card-title">nnvnvn</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">Rating: 3</h6>
-                        <p class="card-text">mdfkfkfkfkmfdkm</p>
-                        <p class="card-text"><small class="text-muted">Posted on 12/1/1222</small></p>
+                        <h5 class="card-title">Đại Nam</h5>
+                        <div class="card-rating">
+                            <span class="star selected">&#9733;</span>
+                            <span class="star selected">&#9733;</span>
+                            <span class="star selected">&#9733;</span>
+                            <span class="star selected">&#9733;</span>
+                            <span class="star-disable">&#9733;</span>
+                        </div>
+                        <p class="card-text">Địa điểm tuyệt vời, phòng ốc sạch sẽ</p>
+                        <p class="card-text"><small class="text-muted">Posted on 12/1/2025</small></p>
+                    </div>
+
+                </div>
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Hải Mõm</h5>
+                        <div class="card-rating">
+                            <span class="star selected">&#9733;</span>
+                            <span class="star-disable">&#9733;</span>
+                            <span class="star-disable">&#9733;</span>
+                            <span class="star-disable">&#9733;</span>
+                            <span class="star-disable">&#9733;</span>
+                        </div>
+                        <p class="card-text">Cách âm hơi kém</p>
+                        <p class="card-text"><small class="text-muted">Posted on 12/1/2025</small></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    function toggleRoomInfo() {
+        $(".room-info-table").toggle();
+    }
+
+    function toggleRoomService() {
+        $(".room-service-table").toggle();
+    }
+</script>
 @endsection

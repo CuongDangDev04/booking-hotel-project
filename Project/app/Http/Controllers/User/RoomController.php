@@ -77,7 +77,6 @@ class RoomController extends Controller
             'adults' => $adults,
             'children' => $children
         ]);
-        // return redirect('/');
     }
 
     public function show($roomType_id)

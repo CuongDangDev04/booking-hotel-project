@@ -15,6 +15,8 @@ class Customer extends Model
     protected $fillable = ['firstName', 'lastName', 'email', 'phone', 'address'];
     public function bookings()
     {
-        return $this->hasMany(Booking::class, 'customer_id');
+        return $this->belongsToMany(Booking::class, 'detail_receipts', 'receipt_id', 'booking_id')
+            ->withPivot('price')
+            ->withTimestamps();
     }
 }
