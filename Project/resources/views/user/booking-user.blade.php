@@ -95,44 +95,56 @@
                                 <div class="row g-3">
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control" id="name" placeholder="Your Name">
-                                            <label for="name">Your Name</label>
+                                            <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Your firstname">
+                                            <label for="name">Tên</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <input type="email" class="form-control" id="email" placeholder="Your Email">
-                                            <label for="email">Your Email</label>
+                                            <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Your lastname">
+                                            <label for="lastname">Họ</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-floating">
+                                            <input type="email" class="form-control" id="email" name="email" placeholder="Your email">
+                                            <label for="email">Email</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="address" name="address" name="address" placeholder="Your address">
+                                            <label for="email">Địa chỉ</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating date" id="date3" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" id="checkin" placeholder="Check In" data-target="#date3" data-toggle="datetimepicker" />
+                                            <input type="date" class="form-control datetimepicker-input" name="checkin" id="checkin" placeholder="Check In" data-target="#date3" data-toggle="datetimepicker" />
                                             <label for="checkin">Check In</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating date" id="date4" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" id="checkout" placeholder="Check Out" data-target="#date4" data-toggle="datetimepicker" />
+                                            <input type="date" class="form-control datetimepicker-input" name="checkout" id="checkout" placeholder="Check Out" data-target="#date4" data-toggle="datetimepicker" />
                                             <label for="checkout">Check Out</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <select class="form-select" id="select1">
-                                                <option value="1">Adult 1</option>
-                                                <option value="2">Adult 2</option>
-                                                <option value="3">Adult 3</option>
+                                            <select class="form-select" name="adults" id="select1">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
                                             </select>
                                             <label for="select1">Select Adult</label>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-floating">
-                                            <select class="form-select" id="select2">
-                                                <option value="1">Child 1</option>
-                                                <option value="2">Child 2</option>
-                                                <option value="3">Child 3</option>
+                                            <select class="form-select" name="children" id="select2">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
                                             </select>
                                             <label for="select2">Select Child</label>
                                         </div>

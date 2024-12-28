@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('user.home-user');
-}) ->name('home');
+})->name('home');
 Route::get('/about', function () {
     return view('user.about-user');
 });
@@ -34,12 +34,16 @@ Route::get('/room/{room}', [RoomController::class, 'show'])->name('room.show');
 Route::get('/booking', function () {
     return view('user.booking-user');
 });
+
+Route::get('/hehe', function () {
+    return view('user.payment-user');
+});
 Route::post('/booking', [BookingController::class, 'bookingRoom'])->name('booking.room');
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified','check.active'])->name('dashboard');
+})->middleware(['auth', 'verified', 'check.active'])->name('dashboard');
 
-Route::middleware('auth','check.active' )->group(function () {
+Route::middleware('auth', 'check.active')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -54,11 +58,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 
 
 
-Route::prefix('admin')->name('admin.')->group(function() {
+Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('users', AdminUserController::class);
 });
 Route::get('/admin/users/{id}/toggle-active', [AdminUserController::class, 'toggleActiveStatus'])->name('admin.users.toggleActiveStatus');
-
-
-
-

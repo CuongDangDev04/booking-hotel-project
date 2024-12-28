@@ -41,45 +41,72 @@ class BookingController extends Controller
             return back()->withErrors($errors)->withInput();
         }
 
-        $customer = Customer::create([
-            'firstName' => $firstname,
-            'lastName' => $lastname,
-            'email' => $email,
-            'phone' => $phone,
-            'address' => $address,
-        ]);
-        $availableRooms = Room::where('roomType_id', $roomType->roomType_id)->count();
+        $roomOfRoomType = Room::where('roomType_id', $roomType->roomType_id)->get();
+        foreach ($roomOfRoomType as $room) {
+            $checkroom = Booking::where('room_id', $room->room_id)
+                ->where(function ($query) use ($checkin, $checkout) {
+                    $query->whereBetween('checkin', [$checkin, $checkout])
+                        ->orWhereBetween('checkout', [$checkin, $checkout])
+                        ->orWhereRaw('? BETWEEN checkin AND checkout', [$checkin])
+                        ->orWhereRaw('? BETWEEN checkin AND checkout', [$checkout]);
+                })
+                ->exists();
+
+            if (!$checkroom) {
+                $room->status = 0;
+                $room->save();
+            }
+        }
+
+        $availableRooms = Room::where('roomType_id', $roomType->roomType_id)->where('status', 0)->count();
         if ($availableRooms >= $totalRoom) {
             $rooms = Room::where('roomType_id', $roomType->roomType_id)->where('status', 0)->limit($totalRoom)->get();
-        } else {
-            return back()->withErrors(['room' => 'Loại phòng này chỉ còn ' . $availableRooms . ' phòng.']);
-        }
-        $receipt = Receipt::create([
-            'issueDate' => date('Y-m-d'),
-            'totalAmount' => $roomType->price * $totalRoom,
-            'status' => 0,
-            'payment_id' => null,
-        ]);
-        $totalAmount = $roomType->price * $totalRoom;
-        foreach ($rooms as $room) {
-
-            $booking = Booking::create([
-                'room_id' => $room->room_id,
-                'customer_id' => $customer->customer_id,
-                'checkin' => $checkin,
-                'checkout' => $checkout,
-                'adults' => $adults,
-                'children' => $children,
-                'totalPrice' => $roomType->price,
-                'status' => 0,
+            $customer = Customer::create([
+                'firstName' => $firstname,
+                'lastName' => $lastname,
+                'email' => $email,
+                'phone' => $phone,
+                'address' => $address,
             ]);
-            $detailReceipt = $booking->receipts()->attach($receipt->receipt_id, ['price' => $roomType->price]);
-            $room->status = 1;
-            $room->save();
+            $receipt = Receipt::create([
+                'issueDate' => date('Y-m-d'),
+                'totalAmount' => $roomType->price * $totalRoom,
+                'status' => 0,
+                'payment_id' => null,
+            ]);
+            $totalAmount = $roomType->price * $totalRoom;
+            foreach ($rooms as $room) {
+
+                $booking = Booking::create([
+                    'room_id' => $room->room_id,
+                    'customer_id' => $customer->customer_id,
+                    'checkin' => $checkin,
+                    'checkout' => $checkout,
+                    'adults' => $adults,
+                    'children' => $children,
+                    'totalPrice' => $roomType->price,
+                    'status' => 0,
+                ]);
+                $detailReceipt = $booking->receipts()->attach($receipt->receipt_id, ['price' => $roomType->price]);
+                $room->status = 1;
+                $room->save();
+            }
+            $receipt->totalAmount = $totalAmount;
+            $receipt->save();
+        } else {
+            return back()->withErrors(['room' => 'Số phòng khả dụng: ' . $availableRooms]);
         }
-        $receipt->totalAmount = $totalAmount;
-        $receipt->save();
+
         //===================================================================================================
-        return redirect('/');
+        return view('user.payment-user', [
+            'customer' => $customer,
+            'receipt' => $receipt,
+            'rooms' => $rooms,
+            'checkin' => $checkin,
+            'checkout' => $checkout,
+            'totalRoom' => $totalRoom,
+            'adults' => $adults,
+            'children' => $children,
+        ]);
     }
 }
