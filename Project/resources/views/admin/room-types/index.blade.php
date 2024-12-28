@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container">
-    <h1 class="mb-4 title-manager-room">Quản lý danh sách các phòng</h1>
+    <h1 class="mb-4 title-manager-room">Quản lý danh sách các loại phòng</h1>
 
     <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#createRoomTypeModal">
         Thêm Phòng Mới

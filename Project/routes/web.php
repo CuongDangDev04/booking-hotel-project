@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminBookingController;
+use App\Http\Controllers\Admin\AdminRoomController;
 use App\Http\Controllers\Admin\AdminRoomTypeController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\ProfileController;
@@ -62,3 +64,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('users', AdminUserController::class);
 });
 Route::get('/admin/users/{id}/toggle-active', [AdminUserController::class, 'toggleActiveStatus'])->name('admin.users.toggleActiveStatus');
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('rooms', AdminRoomController::class);
+});
+
+Route::get('admin/bookings', [AdminBookingController::class, 'index'])->name('admin.bookings.index');
+
+Route::post('admin/bookings/{id}/update-status', [AdminBookingController::class, 'updateStatus'])->name('admin.bookings.updateStatus');
+
+Route::delete('admin/bookings/{id}', [AdminBookingController::class, 'destroy'])->name('admin.bookings.destroy');

@@ -3,6 +3,7 @@
 @section('title', 'Quản lý Người Dùng')
 
 @section('content')
+
 <div class="container">
     <h1 class="mb-4 title-manager-user">Quản lý Người Dùng</h1>
 
@@ -12,10 +13,10 @@
     </button>
 
     <table class="table table-bordered table-hover">
-        <thead class="table-dark " >
+        <thead class="table-dark ">
             <tr>
                 <th>
-                    <a >
+                    <a>
                         ID
                     </a>
                 </th>
@@ -34,10 +35,9 @@
                     </a>
                 </th>
                 <th>
-                    <a href="{{ route('admin.users.index', ['sort_by' => 'role', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
+                    <a >
                         Vai Trò
-                        <i class="fa fa-arrow-up"></i>
-                        <i class="fa fa-arrow-down"></i>
+                        
                     </a>
                 </th>
                 <th>Hành Động</th>
@@ -102,6 +102,10 @@
                                     <label for="password" class="form-label">Mật Khẩu</label>
                                     <input type="password" name="password" class="form-control" id="password">
                                 </div>
+                                <div class="mb-3">
+                                    <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
+                                    <input type="password" class="form-control" name="password_confirmation" required>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
@@ -146,15 +150,56 @@
                         <label for="password" class="form-label">Mật Khẩu</label>
                         <input type="password" name="password" class="form-control" id="password">
                     </div>
+                    <div class="mb-3">
+                        <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
+                        <input type="password" class="form-control" name="password_confirmation" required>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button type="submit" class="btn btn-primary">Lưu</button>
+                    <button type="submit" class="btn btn-primary">Thêm</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
+<!-- Thêm SweetAlert2 CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+@if (session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Thành công!',
+        text: '{{ session("success") }}',
+    });
+</script>
+@endif
+
+@if (session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Có lỗi xảy ra!',
+        text: '{{ session("error") }}',
+    });
+</script>
+@endif
+
+@if ($errors->any())
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Có lỗi xảy ra!',
+        html: `
+                @foreach ($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
+            `
+    });
+</script>
+@endif
 @endsection
 <style>
     /* Định dạng chung cho form */
@@ -235,22 +280,16 @@
     th a[aria-sort="descending"] i.fa-arrow-down {
         display: inline-block;
     }
-    .title-manager-user{
+
+    .title-manager-user {
         font-size: 42px;
         font-weight: bold;
     }
 </style>
 
-<!-- SweetAlert for Errors -->
-@if ($errors->any())
-    <script>
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            html: '<ul>@foreach($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>',
-        });
-    </script>
-@endif
+
+
+
 
 <script>
     function deleteUser(userId) {

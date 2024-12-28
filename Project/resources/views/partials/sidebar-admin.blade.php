@@ -9,16 +9,29 @@
                 <span>Dashboard</span>
             </a>
         </li>
-        <li class="nav-item">
-            <a href="room-types">
-                <i class="far fa-chart-bar"></i>
-                <span>Quản lí phòng</span>
-            </a>
-        </li>
+        
         <li class="nav-item">
             <a href="users">
                 <i class="fas fa-users"></i>
                 <span>Quản lí người dùng</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="rooms">
+                <i class="fas fa-users"></i>
+                <span>Quản lí phòng</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="room-types">
+                <i class="far fa-chart-bar"></i>
+                <span>Quản lí loại phòng</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="bookings">
+                <i class="far fa-chart-bar"></i>
+                <span>Quản lí đặt phòng</span>
             </a>
         </li>
 
