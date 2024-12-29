@@ -34,6 +34,12 @@
                 <span>Quản lí đặt phòng</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="services">
+                <i class="far fa-chart-bar"></i>
+                <span>Quản lí dịch vụ</span>
+            </a>
+        </li>
 
       
 </div>

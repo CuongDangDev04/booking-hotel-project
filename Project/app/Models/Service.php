@@ -14,7 +14,6 @@ class Service extends Model
     protected $primaryKey = 'service_id';
     protected $fillable = [
         'name',         // Tên dịch vụ
-        'description',  // Mô tả dịch vụ
     ];
 
     // Mối quan hệ nhiều-nhiều với RoomType thông qua bảng trung gian room_services

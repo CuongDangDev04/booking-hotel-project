@@ -50,7 +50,7 @@
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->role }}</td>
-                <td>
+                <td style="width: 300px;">
                     <!-- Edit Button -->
                     <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal{{ $user->id }}">
                         Sửa

@@ -41,6 +41,8 @@
                     </a>
                 </th>
                 <th>Mô tả</th>
+                <th>Dịch Vụ</th>
+
                 <th>Hành Động</th>
             </tr>
         </thead>
@@ -52,6 +54,12 @@
                 <td>{{ $roomType->price }}</td>
                 <td>{{ $roomType->occupancy }}</td>
                 <td>{{ $roomType->description }}</td>
+                <td style="width: 300px;">
+                    @foreach ($roomType->services as $service)
+                    <span class="badge bg-primary">{{ $service->name }}</span>
+                    @endforeach
+                </td>
+
                 <td>
                     <!-- Edit Button -->
                     <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editRoomTypeModal{{ $roomType->roomType_id }}">
@@ -96,6 +104,23 @@
                                     <label for="occupancy" class="form-label">Số Người</label>
                                     <input type="number" name="occupancy" class="form-control" value="{{ old('occupancy', $roomType->occupancy) }}" required>
                                 </div>
+                                <!-- Danh sách dịch vụ trong modal sửa -->
+                                <div class="mb-3">
+                                    <label class="form-label">Dịch Vụ</label>
+                                    <div>
+                                        @foreach ($services as $service)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="services[]" value="{{ $service->service_id }}"
+                                                id="service_{{ $service->service_id }}"
+                                                {{ in_array($service->service_id, $roomType->services->pluck('service_id')->toArray()) ? 'checked' : '' }}>
+                                            <label class="form-check-label" for="service_{{ $service->service_id }}">
+                                                {{ $service->name }}
+                                            </label>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
@@ -137,6 +162,22 @@
                         <label for="occupancy" class="form-label">Số Người</label>
                         <input type="number" name="occupancy" class="form-control" id="occupancy" value="{{ old('occupancy') }}" required>
                     </div>
+                    <!-- Danh sách dịch vụ trong modal thêm -->
+                    <div class="mb-3">
+                        <label class="form-label">Dịch Vụ</label>
+                        <div>
+                            @foreach ($services as $service)
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="services[]" value="{{ $service->service_id }}"
+                                    id="service_{{ $service->service_id }}">
+                                <label class="form-check-label" for="service_{{ $service->service_id }}">
+                                    {{ $service->name }}
+                                </label>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
@@ -149,10 +190,11 @@
 @endsection
 
 <style>
-    .title-manager-room{
+    .title-manager-room {
         font-size: 42px;
         font-weight: bold;
     }
+
     .container {
         margin-top: 50px;
     }

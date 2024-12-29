@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminBookingController;
 use App\Http\Controllers\Admin\AdminRoomController;
 use App\Http\Controllers\Admin\AdminRoomTypeController;
+use App\Http\Controllers\Admin\AdminServiceController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\BookingController;
@@ -74,3 +75,7 @@ Route::get('admin/bookings', [AdminBookingController::class, 'index'])->name('ad
 Route::post('admin/bookings/{id}/update-status', [AdminBookingController::class, 'updateStatus'])->name('admin.bookings.updateStatus');
 
 Route::delete('admin/bookings/{id}', [AdminBookingController::class, 'destroy'])->name('admin.bookings.destroy');
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('services', AdminServiceController::class)->except(['show']);
+});
