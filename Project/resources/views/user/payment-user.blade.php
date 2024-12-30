@@ -146,55 +146,43 @@
         </div>
         <div class="col-md-8">
             <h1 class="text-center">Thanh Toán</h1>
-            <form method="post">
+            <form action="{{route('payment.room')}}" method="post">
                 @csrf
+                <input type="hidden" name="receipt_id" value="{{$receipt->receipt_id}}">
                 <h3>Thông tin khách hàng</h3>
                 <div class="form-group mb-3">
-                    <label for="name">Tên</label>
-                    <input type="text" name="name" id="name" class="form-control" placeholder="Enter your name" value="{{ old('name') }}" required>
+                    <label for="firstname">Tên</label>
+                    <input type="text" name="firstname" id="firstname" class="form-control" placeholder="Nhập tên" value="{{ old('firstname') ?? $customer->firstName }}" required>
+                </div>
+                <div class="form-group mb-3">
+                    <label for="lastname">Họ</label>
+                    <input type="text" name="lastname" id="lastname" class="form-control" placeholder="Nhập họ" value="{{ old('lastname') ?? $customer->lastName }}" required>
                 </div>
                 <div class="form-group mb-3">
                     <label for="email">Email</label>
-                    <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email" value="{{ old('email') }}" required>
+                    <input type="email" name="email" id="email" class="form-control" placeholder="Enter your email" value="{{ old('email') ?? $customer->email }}" required>
                 </div>
                 <div class="form-group mb-3">
                     <label for="phone">Số điện thoại</label>
-                    <input type="text" name="phone" id="phone" class="form-control" placeholder="Enter your phone" value="{{ old('phone') }}" required>
+                    <input type="text" name="phone" id="phone" class="form-control" placeholder="Enter your phone" value="{{ old('phone') ?? $customer->phone}}" required>
                 </div>
                 <div class="form-group mb-3">
                     <label for="address">Địa chỉ</label>
-                    <input type="text" name="address" id="address" class="form-control" placeholder="Enter your address" value="{{ old('address') }}" required>
+                    <input type="text" name="address" id="address" class="form-control" placeholder="Enter your address" value="{{ old('address') ?? $customer->address}}" required>
                 </div>
 
                 <h3>Thông tin thanh toán</h3>
-                <div class="form-group mb-3">
-                    <label for="amount">Tổng cộng</label>
-                    <input type="text" name="amount" id="amount" class="form-control" placeholder="Enter amount" value="{{ old('amount') }}" required>
-                </div>
+
                 <div class="form-group mb-3">
                     <label for="payment_method">Phương thức thanh toán</label>
                     <select name="payment_method" id="payment_method" class="form-control" required>
-                        <option value="credit_card">Credit Card</option>
-                        <option value="paypal">PayPal</option>
-                        <option value="bank_transfer">Bank Transfer</option>
+                        <option value="credit_card">Thẻ tín dụng</option>
+                        <option value="bank_transfer">Chuyển khoản ngân hàng</option>
+                        <option value="cash" selected>Thanh toán tại quầy</option>
                     </select>
                 </div>
 
-                <div id="credit_card_info" class="payment-info" style="display: none;">
-                    <h4>Credit Card Information</h4>
-                    <div class="form-group mb-3">
-                        <label for="card_number">Card Number</label>
-                        <input type="text" name="card_number" id="card_number" class="form-control" placeholder="Enter card number">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="expiry_date">Expiry Date</label>
-                        <input type="text" name="expiry_date" id="expiry_date" class="form-control" placeholder="MM/YY">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="cvv">CVV</label>
-                        <input type="text" name="cvv" id="cvv" class="form-control" placeholder="Enter CVV">
-                    </div>
-                </div>
+
 
                 <button type="submit" class="btn btn-primary">Submit Payment</button>
             </form>
@@ -202,14 +190,4 @@
     </div>
 </div>
 
-<script>
-    document.getElementById('payment_method').addEventListener('change', function() {
-        var creditCardInfo = document.getElementById('credit_card_info');
-        if (this.value === 'credit_card') {
-            creditCardInfo.style.display = 'block';
-        } else {
-            creditCardInfo.style.display = 'none';
-        }
-    });
-</script>
 @endsection
