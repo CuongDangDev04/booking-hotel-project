@@ -8,10 +8,14 @@ use Illuminate\Http\Request;
 
 class AdminServiceController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $services = Service::all();
-        return view('admin.services.index', compact('services'));
+        $sortBy = $request->get('sort_by', 'name', 'service_id');
+        $sortOrder = $request->get('sort_order', 'asc');
+        $services = Service::
+            orderBy($sortBy, $sortOrder)
+            ->get() ;
+        return view('admin.services.index', compact('services', 'sortBy', 'sortOrder'));
     }
 
     public function store(Request $request)

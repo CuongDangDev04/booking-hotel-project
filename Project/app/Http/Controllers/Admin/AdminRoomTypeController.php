@@ -13,7 +13,6 @@ class AdminRoomTypeController extends Controller
 {
     $sortBy = $request->get('sort_by', 'name');
     $sortOrder = $request->get('sort_order', 'asc');
-
     $roomTypes = RoomType::orderBy($sortBy, $sortOrder)->get();
     $services = Service::all(); // Lấy tất cả dịch vụ
 

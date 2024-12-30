@@ -7,7 +7,7 @@
     <h1 class="mb-4 title-manager-service">Quản lý Dịch Vụ</h1>
 
     <!-- Add Service Button -->
-    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addServiceModal">
+    <button type="button" class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addServiceModal">
         Thêm Dịch Vụ
     </button>
 
@@ -15,8 +15,18 @@
     <table class="table table-bordered table-hover">
         <thead class="table-dark">
             <tr>
-                <th>ID</th>
-                <th>Tên Dịch Vụ</th>
+                <th>
+                    <a href="{{ route('admin.services.index', ['sort_by' => 'service_id', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
+                        ID
+                        <i class="fa fa-arrow-up"></i>
+                        <i class="fa fa-arrow-down"></i>
+                    </a>
+                </th>
+                <th><a href="{{ route('admin.services.index', ['sort_by' => 'name', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
+                        ID
+                        <i class="fa fa-arrow-up"></i>
+                        <i class="fa fa-arrow-down"></i>
+                    </a></th>
                 <th>Hành Động</th>
             </tr>
         </thead>
