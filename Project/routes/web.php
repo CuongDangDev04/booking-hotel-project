@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\BookingController;
 use App\Http\Controllers\User\RoomController;
 use Illuminate\Support\Facades\Route;
+use Monolog\Handler\RotatingFileHandler;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,10 +35,8 @@ Route::get('/room/{room}', [RoomController::class, 'show'])->name('room.show');
 Route::get('/booking', function () {
     return view('user.booking-user');
 });
-
-Route::get('/hehe', function () {
-    return view('user.payment-user');
-});
+Route::post('payment', [BookingController::class, 'payment'])->name('payment.room');
+Route::post('/payment-success', [BookingController::class, 'paymentSuccess'])->name('payment.success');
 Route::post('/booking', [BookingController::class, 'bookingRoom'])->name('booking.room');
 Route::get('/dashboard', function () {
     return view('dashboard');

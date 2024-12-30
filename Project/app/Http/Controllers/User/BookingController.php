@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\Customer;
+use App\Models\Payment;
 use App\Models\Receipt;
 use App\Models\Room;
 use App\Models\RoomType;
@@ -32,6 +33,9 @@ class BookingController extends Controller
         $errors = [];
         if (strtotime($checkin) >= strtotime($checkout)) {
             $errors['date'] = 'Ngày nhận phòng phải nhỏ hơn ngày trả phòng.';
+        }
+        if ($guests < 1) {
+            $errors['numGuest'] = 'Phải có ít nhất 1 khách hàng';
         }
         $maxGuests = $roomType->occupancy * $totalRoom; // Tổng số người tối đa cho tất cả các phòng đã đặt
         if ($guests > $maxGuests) {
@@ -97,6 +101,7 @@ class BookingController extends Controller
             return back()->withErrors(['room' => 'Số phòng khả dụng: ' . $availableRooms]);
         }
 
+        // dd($receipt);
         //===================================================================================================
         return view('user.payment-user', [
             'customer' => $customer,
@@ -108,5 +113,43 @@ class BookingController extends Controller
             'adults' => $adults,
             'children' => $children,
         ]);
+    }
+    public function payment(Request $request)
+    {
+        $firstname = $request->input('firstname');
+        $lastname = $request->input('lastname');
+        $email = $request->input('email');
+        $phone = $request->input('phone');
+        $address = $request->input('address');
+        $receipt_id = (int) $request->input('receipt_id');
+        $paymentMethod = $request->input('payment_method');
+        if ($paymentMethod == 'cash') {
+            $receipt = Receipt::find($receipt_id);
+            return redirect('/')->with('success', 'Đặt phòng thành công! Hãy chuẩn bị số tiền tương ứng khi nhận phòng.');
+        } else if ($paymentMethod == 'bank_transfer' || $paymentMethod == 'credit_card') {
+            $receipt = Receipt::find($receipt_id);
+            // dd($receipt);
+            return view('user.paying-user', [
+                'receipt' => $receipt,
+                'paymentMethod' => $paymentMethod
+            ]);
+        }
+    }
+    public function paymentSuccess(Request $request)
+    {
+        $receipt_id = $request->input('receipt_id');
+        $paymentMethod = $request->input('paymentMethod');
+
+        $receipt = Receipt::find($receipt_id);
+
+        $payment = Payment::create([
+            'receipt_id' => $receipt_id,
+            'paymentDate' => date('Y-m-d'),
+            'paymentMethod' => $paymentMethod,
+            'status' => 1,
+        ]);
+        $receipt->status = 1;
+        $receipt->save();
+        return redirect('/')->with('success', 'Đặt phòng thành công! Hãy kiểm tra email của bạn để xem thông tin chi tiết.');
     }
 }
