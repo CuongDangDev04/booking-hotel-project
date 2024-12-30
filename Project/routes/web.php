@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminBookingController;
+use App\Http\Controllers\Admin\AdminReceiptController;
 use App\Http\Controllers\Admin\AdminRoomController;
 use App\Http\Controllers\Admin\AdminRoomTypeController;
 use App\Http\Controllers\Admin\AdminServiceController;
@@ -78,3 +79,11 @@ Route::delete('admin/bookings/{id}', [AdminBookingController::class, 'destroy'])
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('services', AdminServiceController::class)->except(['show']);
 });
+Route::prefix('admin')->name('admin.')->group(function () {
+    // Route cho danh sách hóa đơn (bao gồm chi tiết nếu có id)
+    Route::get('receipts', [AdminReceiptController::class, 'index'])->name('receipts.index');
+    
+    // Route cho chi tiết hóa đơn
+    Route::get('receipts/{id}', [AdminReceiptController::class, 'show'])->name('receipts.show');
+});
+Route::delete('admin/receipts/{id}', [AdminReceiptController::class, 'destroy'])->name('admin.receipts.destroy');

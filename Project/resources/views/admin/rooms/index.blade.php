@@ -10,7 +10,7 @@
         Thêm Phòng Mới
     </button>
 
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-striped table-hover">
         <thead class="table-dark">
             <tr>
                 <th>

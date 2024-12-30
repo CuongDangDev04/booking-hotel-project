@@ -7,7 +7,7 @@
     <h1 class="mb-4 title-manager-room">Quản lý Đặt Phòng</h1>
 
     <!-- Bookings Table -->
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-striped table-hover">
         <thead class="table-dark">
             <tr>
                 <th><a href="{{ route('admin.bookings.index', ['sort_by' => 'booking_id', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">ID
@@ -17,8 +17,9 @@
                 <th>Tên Khách Hàng
                    
                 </a></th>
-                <th><a >Số Phòng
-                    
+                <th><a href="{{ route('admin.bookings.index', ['sort_by' => 'room_id', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">Số phòng
+                    <i class="fa fa-arrow-up"></i>
+                    <i class="fa fa-arrow-down"></i>
                 </a></th>
                 <th><a href="{{ route('admin.bookings.index', ['sort_by' => 'checkin', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">Ngày Nhận Phòng
                     <i class="fa fa-arrow-up"></i>

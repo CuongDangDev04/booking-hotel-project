@@ -12,10 +12,10 @@
     </button>
 
     <!-- Services Table -->
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-striped table-hover">
         <thead class="table-dark">
             <tr>
-                <th>
+                <th style="width: 100px;">
                     <a href="{{ route('admin.services.index', ['sort_by' => 'service_id', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
                         ID
                         <i class="fa fa-arrow-up"></i>

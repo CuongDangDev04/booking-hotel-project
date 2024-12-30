@@ -10,13 +10,14 @@
         Thêm Phòng Mới
     </button>
 
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-striped table-hover">
         <thead class="table-dark">
             <tr>
                 <th>
-                    <a>
+                    <a href="{{ route('admin.room-types.index', ['sort_by' => 'roomType_id', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
                         ID
-
+                        <i class="fa fa-arrow-up"></i>
+                        <i class="fa fa-arrow-down"></i>
                     </a>
                 </th>
                 <th>
