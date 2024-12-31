@@ -40,6 +40,12 @@
                 <span>Quản lí dịch vụ</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="receipts">
+                <i class="far fa-chart-bar"></i>
+                <span>Quản lí hóa đơn</span>
+            </a>
+        </li>
 
       
 </div>

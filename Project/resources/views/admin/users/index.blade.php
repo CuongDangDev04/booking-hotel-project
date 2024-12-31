@@ -12,12 +12,14 @@
         Thêm Người Dùng Mới
     </button>
 
-    <table class="table table-bordered table-hover">
+    <table class="table table-bordered table-striped table-hover">
         <thead class="table-dark ">
             <tr>
-                <th>
-                    <a>
+            <th>
+                    <a href="{{ route('admin.users.index', ['sort_by' => 'id', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
                         ID
+                        <i class="fa fa-arrow-up"></i>
+                        <i class="fa fa-arrow-down"></i>
                     </a>
                 </th>
                 <th>
