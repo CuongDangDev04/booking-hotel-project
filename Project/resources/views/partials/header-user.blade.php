@@ -40,7 +40,7 @@
                          <a href="/" class="nav-item nav-link {{ request()->is('/') ? 'active' : '' }}">Home</a>
                          <a href="/about" class="nav-item nav-link {{ request()->is('about') ? 'active' : '' }}">About</a>
                          <a href="/room" class="nav-item nav-link {{ request()->is('room') ? 'active' : '' }}">Rooms</a>
-                         <a href="/booking" class="nav-item nav-link {{ request()->is('booking') ? 'active' : '' }}">Booking</a>
+
                          <a href="/contact" class="nav-item nav-link {{ request()->is('contact') ? 'active' : '' }}">Contact</a>
                      </div>
                      @if (Route::has('login'))

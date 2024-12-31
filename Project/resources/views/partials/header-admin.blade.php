@@ -1,7 +1,10 @@
 <nav class="navbar2" style="background-color: #0F172B">
     <a href="/admin" class="logo">
-        <img src="{{ asset('img/logo.png') }}" alt="Logo" class="navbar2-br height="50px" />
-
+        <div class="row">
+            <div class="logo d-flex justify-content-center ">
+                <p style="color:#FEA116 !important" class="text-primary  fs-1 fw-bold">HOTELIER</p>
+            </div>
+        </div>
     </a>
     @auth
 

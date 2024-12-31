@@ -38,9 +38,7 @@ Route::get('/contact', function () {
 Route::get('/room', [RoomController::class, 'index']);
 Route::get('/find-rooms', [RoomController::class, 'findAvailableRooms'])->name('find.rooms');
 Route::get('/room/{room}', [RoomController::class, 'show'])->name('room.show');
-Route::get('/booking', function () {
-    return view('user.booking-user');
-});
+
 
 Route::get('/test', function () {
     return view('user.test');

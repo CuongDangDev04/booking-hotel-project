@@ -28,7 +28,7 @@
                     </a>
                 </th>
                 <th>
-                    <a href="{{ route('admin.rooms.index', ['sort_by' => 'roomType', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
+                    <a href="{{ route('admin.rooms.index', ['sort_by' => 'roomType_id', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
                         Loại Phòng
                         <i class="fa fa-arrow-up"></i>
                         <i class="fa fa-arrow-down"></i>
