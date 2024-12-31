@@ -15,6 +15,10 @@ class BookingController extends Controller
 {
     public function bookingRoom(Request $request)
     {
+        $user_id = null;
+        if (auth()->check()) {
+            $user_id = auth()->id(); // Lấy ID người dùng đã đăng nhập
+        }
         $roomType = RoomType::find($request->input('room_id'));
         $firstname = $request->input('firstname');
         $lastname = $request->input('lastname');
@@ -84,6 +88,7 @@ class BookingController extends Controller
                 $booking = Booking::create([
                     'room_id' => $room->room_id,
                     'customer_id' => $customer->customer_id,
+                    'user_id' => $user_id,
                     'checkin' => $checkin,
                     'checkout' => $checkout,
                     'adults' => $adults,
@@ -101,17 +106,53 @@ class BookingController extends Controller
             return back()->withErrors(['room' => 'Số phòng khả dụng: ' . $availableRooms]);
         }
 
-        // dd($receipt);
+        $_checkin = strtotime($checkin);
+        $_checkout = strtotime($checkout);
+        $daysOfWeek = [
+            "Chủ Nhật",
+            "Thứ 2",
+            "Thứ 3",
+            "Thứ 4",
+            "Thứ 5",
+            "Thứ 6",
+            "Thứ 7"
+        ];
+        $dayOfWeek_checkin = $daysOfWeek[date("w", $_checkin)];
+        $dayOfWeek_checkout = $daysOfWeek[date("w", $_checkout)];
+
+        $day_checkin = date("d", $_checkin);
+        $day_checkout = date("d", $_checkout);
+
+        $month_checkin = date("m", $_checkin);
+        $month_checkout = date("m", $_checkout);
+
+        $year_checkin = date("Y", $_checkin);
+        $year_checkout = date("Y", $_checkout);
+
+        $totalDays = $_checkout - $_checkin;
+        $totalDays = $totalDays / (60 * 60 * 24);
+
         //===================================================================================================
         return view('user.payment-user', [
             'customer' => $customer,
             'receipt' => $receipt,
             'rooms' => $rooms,
+            'roomType' => $roomType,
             'checkin' => $checkin,
             'checkout' => $checkout,
             'totalRoom' => $totalRoom,
             'adults' => $adults,
             'children' => $children,
+            'dayOfWeek_checkin' => $dayOfWeek_checkin,
+            'dayOfWeek_checkout' => $dayOfWeek_checkout,
+            'day_checkin' => $day_checkin,
+            'day_checkout' => $day_checkout,
+            'month_checkin' => $month_checkin,
+            'month_checkout' => $month_checkout,
+            'year_checkin' => $year_checkin,
+            'year_checkout' => $year_checkout,
+            'totalDays' => $totalDays
+
         ]);
     }
     public function payment(Request $request)

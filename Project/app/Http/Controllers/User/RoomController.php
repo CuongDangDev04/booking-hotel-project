@@ -20,6 +20,7 @@ class RoomController extends Controller
         $total = $rooms->count();
         $pages = ceil($total / $perPage);
 
+
         $roomsForCurrentPage = $rooms->slice(($currentPage - 1) * $perPage, $perPage);
         return view('user.room-user', [
             'rooms' => $roomsForCurrentPage,
@@ -38,7 +39,6 @@ class RoomController extends Controller
         // Logic tìm kiếm phòng trống
         $roomTypes = RoomType::where('occupancy', '>=', $guests)->get();
 
-        $availableRooms = [];
 
         foreach ($roomTypes as $roomType) {
             $rooms = $roomType->rooms;

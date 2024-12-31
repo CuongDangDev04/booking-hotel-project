@@ -1,6 +1,9 @@
 <x-guest-layout>
     <!-- Session Status -->
+
     <x-auth-session-status class="mb-4" :status="session('status')" />
+
+
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
@@ -17,9 +20,9 @@
             <x-input-label for="password" :value="__('Password')" />
 
             <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
+                type="password"
+                name="password"
+                required autocomplete="current-password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
@@ -31,20 +34,20 @@
                 <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
             </label>
             @if (Route::has('password.request'))
-                <a class="text-decoration-underline text-muted fs-6 hover-text-dark rounded-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
+            <a class="text-decoration-underline text-muted fs-6 hover-text-dark rounded-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" href="{{ route('password.request') }}">
+                {{ __('Forgot your password?') }}
+            </a>
             @endif
         </div>
 
         <div class="d-flex justify-content-between mt-4">
-        <a class="text-decoration-underline text-muted fs-6 hover-text-dark rounded-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" href="{{ route('register') }}">
-        {{ __('Already registered?') }}
-        </a>
-        <button class="btn btn-primary ms-3">
-            {{__('Log in')}}
-        </button>
-</div>
+            <a class="text-decoration-underline text-muted fs-6 hover-text-dark rounded-3 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary" href="{{ route('register') }}">
+                {{ __('Already registered?') }}
+            </a>
+            <button class="btn btn-primary ms-3">
+                {{__('Log in')}}
+            </button>
+        </div>
 
     </form>
 </x-guest-layout>

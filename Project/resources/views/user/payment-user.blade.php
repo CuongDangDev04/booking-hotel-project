@@ -66,33 +66,68 @@
     .detail-booking,
     .price-summary {
         border: 1px solid var(--primary);
-        border-radius: 5px;
+        border-radius: 10px;
         background-color: #fff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     .detail-title,
     .price-summary .title {
         border-bottom: 1px solid var(--primary);
-        background-color: #ffdca8;
+        background-color: #ff9800;
+        color: #fff;
         margin: 0;
+        border-radius: 10px 10px 0 0;
+        font-size: 1.2rem;
+    }
+
+    .detail-booking .p-2,
+    .price-summary .p-2 {
+        padding: 1rem;
     }
 
     .checkin,
     .checkout,
     .length-stay {
-        margin: 0.5rem 0;
-        padding-left: 1rem;
+        margin: 1rem 0;
+        padding-left: 1.5rem;
     }
 
     .checkin,
     .checkout {
-        border-bottom: 1px solid var(--primary);
+        border-bottom: 1px dashed var(--primary);
     }
 
     .checkin p,
     .checkout p,
     .length-stay p {
         margin: 0;
+        font-size: 1rem;
+    }
+
+    .length-stay p {
+        font-weight: 500;
+    }
+
+    .price-summary ul {
+        margin: 0;
+        padding: 0 1.5rem;
+    }
+
+    .price-summary li {
+        font-size: 1rem;
+        padding: 0.5rem 0;
+    }
+
+    .total-amount {
+        font-weight: bold;
+        font-size: 1.2rem;
+        border-top: 1px solid var(--primary);
+        margin-top: 1rem;
+    }
+
+    .container {
+        max-width: 1200px;
     }
 </style>
 <div class="d-flex progress-container justify-content-center m-5">
@@ -121,26 +156,27 @@
                 <h6 class="detail-title p-2 text-center">Chi tiết đặt phòng</h6>
                 <div class="checkin">
                     <p class="fw-bold">Ngày nhận phòng:</p>
-                    <p><span>Thứ 2</span>, <span>30 Tháng 12</span>, <span>2024</span></p>
+                    <p><span>{{$dayOfWeek_checkin}}</span>, <span>{{$day_checkin}} Tháng {{$month_checkin}}</span>, <span>{{$year_checkin}}</span></p>
                 </div>
                 <div class="checkout">
                     <p class="fw-bold">Ngày trả phòng:</p>
-                    <p><span>Thứ 2</span>, <span>30 Tháng 12</span>, <span>2024</span></p>
+                    <p><span>{{$dayOfWeek_checkout}}</span>, <span>{{$day_checkout}} Tháng {{$month_checkout}}</span>, <span>{{$year_checkout}}</span></p>
                 </div>
                 <div class="length-stay">
                     <p class="fw-bold">Tổng thời gian lưu trú:</p>
-                    <p>1 ngày</p>
+                    <p>{{$totalDays}} ngày</p>
                 </div>
             </div>
             <div class="price-summary fs-4">
                 <h6 class="title p-2 text-center">Tóm tắt chi phí</h6>
                 <ul class="list-unstyled p-3 mb-0">
-                    <li class="d-flex justify-content-between"><span>Số phòng 1: </span><span>100</span></li>
-                    <li class="d-flex justify-content-between"><span>Số phòng 2: </span><span>100</span></li>
+                    @foreach($rooms as $room)
+                    <li class="d-flex justify-content-between"><span>{{$roomType->name}}: </span><span>{{$roomType->price}}</span></li>
+                    @endforeach
                 </ul>
                 <p class="total-amount d-flex justify-content-between p-3 pt-0">
-                    <span>Price: </span>
-                    <span>200</span>
+                    <span>Tổng cộng: </span>
+                    <span>{{$roomType->price * $totalDays * count($rooms)}}</span>
                 </p>
             </div>
         </div>

@@ -5,9 +5,11 @@ use App\Http\Controllers\Admin\AdminRoomController;
 use App\Http\Controllers\Admin\AdminRoomTypeController;
 use App\Http\Controllers\Admin\AdminServiceController;
 use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\BookingController;
 use App\Http\Controllers\User\RoomController;
+use App\Models\Booking;
 use Illuminate\Support\Facades\Route;
 use Monolog\Handler\RotatingFileHandler;
 
@@ -38,11 +40,18 @@ Route::get('/room/{room}', [RoomController::class, 'show'])->name('room.show');
 Route::get('/booking', function () {
     return view('user.booking-user');
 });
+
+Route::get('/test', function () {
+    return view('user.test');
+});
+
 Route::post('payment', [BookingController::class, 'payment'])->name('payment.room');
 Route::post('/payment-success', [BookingController::class, 'paymentSuccess'])->name('payment.success');
 Route::post('/booking', [BookingController::class, 'bookingRoom'])->name('booking.room');
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $user = auth()->user();
+    $bookings = Booking::where('user_id', $user->id)->get();
+    return view('dashboard', compact('user', 'bookings'));
 })->middleware(['auth', 'verified', 'check.active'])->name('dashboard');
 
 Route::middleware('auth', 'check.active')->group(function () {
@@ -52,7 +61,11 @@ Route::middleware('auth', 'check.active')->group(function () {
 });
 require __DIR__ . '/auth.php';
 
-
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/user-info', [DashboardController::class, 'userInfo'])->name('dashboard.userInfo');
+    Route::get('/dashboard/bookings', [DashboardController::class, 'bookings'])->name('dashboard.bookings');
+});
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('room-types', AdminRoomTypeController::class);
