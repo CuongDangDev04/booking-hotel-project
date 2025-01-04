@@ -19,14 +19,38 @@ class AdminBookingController extends Controller
 
         return view('admin.bookings.index', compact('bookings', 'sortBy', 'sortOrder'));
     }
-
     public function updateStatus(Request $request, $id)
     {
         $booking = Booking::findOrFail($id);
-        $booking->update(['status' => $request->status]);
 
-        return redirect()->back()->with('success', 'Cập nhật trạng thái thành công.');
+        $status = $request->input('status');
+
+        $booking->status = $status;
+        $booking->save();
+
+        foreach ($booking->receipts as $receipt) {
+            $receipt->status = $status;
+            $receipt->save();
+        }
+
+        return redirect()->route('admin.bookings.index')->with('success', 'Cập nhật trạng thái booking và hóa đơn thành công!');
     }
+    public function updateBookingStatus(Request $request, $id)
+{
+    $booking = Booking::findOrFail($id);
+    $status = $request->input('status');   
+
+    $booking->status = $status;
+    $booking->save();
+
+    foreach ($booking->receipts as $receipt) {
+        $receipt->status = $status;
+        $receipt->save();
+    }
+
+    return redirect()->route('admin.bookings.index')->with('success', 'Cập nhật trạng thái booking và hóa đơn thành công!');
+}
+
 
     public function destroy($id)
     {

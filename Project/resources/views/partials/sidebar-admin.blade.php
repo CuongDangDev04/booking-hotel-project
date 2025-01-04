@@ -3,13 +3,7 @@
 
     </div>
     <ul class="nav">
-        <li class="nav-item">
-            <a href="dashboard">
-                <i class="fas fa-home"></i>
-                <span>Dashboard</span>
-            </a>
-        </li>
-        
+       
         <li class="nav-item">
             <a href="users">
                 <i class="fas fa-users"></i>

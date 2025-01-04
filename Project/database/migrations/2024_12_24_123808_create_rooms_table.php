@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('room_id'); // Primary Key
             $table->string('roomNo'); // Số phòng
             $table->unsignedBigInteger('roomType_id'); // Foreign Key tới RoomType
-            $table->boolean('status')->default(true); // Trạng thái phòng (true = available)
+            $table->boolean('status')->default(0); // Trạng thái phòng (true = available)
             $table->integer('floor')->nullable(); // Tầng
             $table->timestamps(); // created_at, updated_at
 

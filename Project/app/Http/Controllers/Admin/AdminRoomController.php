@@ -28,7 +28,7 @@ class AdminRoomController extends Controller
         $request->validate([
             'roomNo' => 'required|unique:rooms|max:255',
             'roomType_id' => 'required|exists:room_types,roomType_id',
-            'status' => 'required|boolean',
+            'status' => 'boolean',
             'floor' => 'required|integer',
         ], [
             'roomNo.required' => 'Số phòng là bắt buộc.',
@@ -36,7 +36,6 @@ class AdminRoomController extends Controller
             'roomNo.max' => 'Số phòng không được vượt quá 255 ký tự.',
             'roomType_id.required' => 'Loại phòng là bắt buộc.',
             'roomType_id.exists' => 'Loại phòng không tồn tại.',
-            'status.required' => 'Trạng thái là bắt buộc.',
             'status.boolean' => 'Trạng thái phải là đúng hoặc sai.',
             'floor.integer' => 'Số tầng không hợp lệ',
             'floor.required' => 'Số tầng là bắt buộc',

@@ -176,6 +176,7 @@ class BookingController extends Controller
             ]);
         }
     }
+
     public function paymentSuccess(Request $request)
     {
         $receipt_id = $request->input('receipt_id');
@@ -189,8 +190,19 @@ class BookingController extends Controller
             'paymentMethod' => $paymentMethod,
             'status' => 1,
         ]);
+
         $receipt->status = 1;
         $receipt->save();
+
+        $booking = Booking::whereHas('receipts', function ($query) use ($receipt_id) {
+            $query->where('detail_receipts.receipt_id', $receipt_id); 
+        })->first();
+
+        if ($booking) {
+            $booking->status = 1;  
+            $booking->save();
+        }
+
         return redirect('/')->with('success', 'Đặt phòng thành công! Hãy kiểm tra email của bạn để xem thông tin chi tiết.');
     }
 }

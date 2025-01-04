@@ -57,7 +57,7 @@
                 <td>{{ $room->room_id }}</td>
                 <td>{{ $room->roomNo }}</td>
                 <td>{{ $room->roomType->name ?? 'N/A' }}</td>
-                <td>{{ $room->status ? 'Trống' : 'Đang sử dụng' }}</td>
+                <td>{{ $room->status ? 'Đang sử dụng ' : 'Trống' }}</td>
                 <td>{{ $room->floor }}</td>
                 <td>
                     <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editRoomModal{{ $room->room_id }}">
@@ -101,13 +101,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="status" class="form-label">Trạng Thái</label>
-                                    <select name="status" class="form-select">
-                                        <option value="1" {{ $room->status ? 'selected' : '' }}>Trống</option>
-                                        <option value="0" {{ !$room->status ? 'selected' : '' }}>Đang sử dụng</option>
-                                    </select>
-                                </div>
+                                
                                 <div class="mb-3">
                                     <label for="floor" class="form-label">Tầng</label>
                                     <input type="text" name="floor" class="form-control" value="{{ old('floor', $room->floor) }}">
@@ -149,13 +143,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label for="status" class="form-label">Trạng Thái</label>
-                        <select name="status" class="form-select">
-                            <option value="1">Trống</option>
-                            <option value="0">Đang sử dụng</option>
-                        </select>
-                    </div>
+                   
                     <div class="mb-3">
                         <label for="floor" class="form-label">Tầng</label>
                         <input type="number" name="floor" class="form-control" value="{{ old('floor') }}">
