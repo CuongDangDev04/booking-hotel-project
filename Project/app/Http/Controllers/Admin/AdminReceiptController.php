@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Receipt;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
-
+use TCPDF;
 
 class AdminReceiptController extends Controller
 {
@@ -56,10 +56,24 @@ class AdminReceiptController extends Controller
         // Lấy hóa đơn và các thông tin liên quan
         $receipt = Receipt::with(['bookings.customer', 'bookings.room', 'payment'])->findOrFail($id);
 
-        // Tạo PDF từ view
-        $pdf = FacadePdf ::loadView('admin.receipts.pdf', compact('receipt'));
+        // Khởi tạo đối tượng TCPDF
+        $pdf = new TCPDF();
+
+       
+
+        // Thêm trang mới
+        $pdf->AddPage();
+
+        // Thiết lập font cho nội dung, sử dụng phông chữ Unicode để hỗ trợ tiếng Việt
+        $pdf->SetFont('dejavusans', '', 12);
+
+        // Tạo nội dung HTML từ view
+        $html = view('admin.receipts.pdf', compact('receipt'))->render();
+
+        // Viết nội dung HTML vào PDF
+        $pdf->writeHTML($html);
 
         // Xuất PDF và tải về
-        return $pdf->download('receipt_' . $id . '.pdf');
+        return $pdf->Output('receipt_' . $id . '.pdf', 'D');
     }
 }
