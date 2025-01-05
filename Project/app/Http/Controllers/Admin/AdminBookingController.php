@@ -4,21 +4,35 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
+use App\Models\Room;
 use Illuminate\Http\Request;
 
 class AdminBookingController extends Controller
 {
     public function index(Request $request)
     {
-        $sortBy = $request->input('sort_by', 'booking_id');  
-        $sortOrder = $request->input('sort_order', 'asc');     
+        $sortBy = $request->input('sort_by', 'booking_id');
+        $sortOrder = $request->input('sort_order', 'asc');
 
+        // Lấy danh sách các phòng đang được đặt trong thời điểm hiện tại
+        $bookedRoomIds = Booking::where('checkin', '<=', now())
+            ->where('checkout', '>=', now())
+            ->pluck('room_id');
+
+        // Lấy danh sách tất cả các phòng
+        $allRooms = Room::all();
+
+        // Lọc danh sách phòng trống
+        $availableRooms = $allRooms->whereNotIn('room_id', $bookedRoomIds);
+
+        // Lấy danh sách booking (nếu cần)
         $bookings = Booking::with(['customer', 'room', 'user'])
             ->orderBy($sortBy, $sortOrder)
             ->get();
 
-        return view('admin.bookings.index', compact('bookings', 'sortBy', 'sortOrder'));
+        return view('admin.bookings.index', compact('bookings', 'sortBy', 'sortOrder', 'availableRooms'));
     }
+
     public function updateStatus(Request $request, $id)
     {
         $booking = Booking::findOrFail($id);
@@ -36,20 +50,20 @@ class AdminBookingController extends Controller
         return redirect()->route('admin.bookings.index')->with('success', 'Cập nhật trạng thái booking và hóa đơn thành công!');
     }
     public function updateBookingStatus(Request $request, $id)
-{
-    $booking = Booking::findOrFail($id);
-    $status = $request->input('status');   
+    {
+        $booking = Booking::findOrFail($id);
+        $status = $request->input('status');
 
-    $booking->status = $status;
-    $booking->save();
+        $booking->status = $status;
+        $booking->save();
 
-    foreach ($booking->receipts as $receipt) {
-        $receipt->status = $status;
-        $receipt->save();
+        foreach ($booking->receipts as $receipt) {
+            $receipt->status = $status;
+            $receipt->save();
+        }
+
+        return redirect()->route('admin.bookings.index')->with('success', 'Cập nhật trạng thái booking và hóa đơn thành công!');
     }
-
-    return redirect()->route('admin.bookings.index')->with('success', 'Cập nhật trạng thái booking và hóa đơn thành công!');
-}
 
 
     public function destroy($id)

@@ -5,17 +5,18 @@
 @section('content')
 <div class="container">
     <h1 class="mb-4 title-manager-room">Chi tiết Hóa đơn #{{ $selectedReceipt->receipt_id }}</h1>
+    <a class="btn btn-primary" href="{{ route('admin.receipts.export', [$selectedReceipt->receipt_id]) }}">Xuất hóa đơn</a>
 
     <p><strong>Ngày phát hành:</strong> {{ \Carbon\Carbon::parse($selectedReceipt->issueDate)->format('d/m/Y') }}</p>
     <p><strong>Tổng tiền:</strong> {{ number_format($selectedReceipt->totalAmount, 2) }} VND</p>
 
-    <p><strong>Trạng thái:</strong> 
+    <p><strong>Trạng thái:</strong>
         @if ($selectedReceipt->status == 0)
-            Chưa thanh toán
+        Chưa thanh toán
         @elseif ($selectedReceipt->status == 1)
-            Đã thanh toán
+        Đã thanh toán
         @else
-            N/A
+        N/A
         @endif
     </p>
 
@@ -43,28 +44,28 @@
 
     <h3>Thông tin thanh toán</h3>
     @if ($selectedReceipt->payment)
-        <p><strong>Hình thức thanh toán:</strong> 
-            @if ($selectedReceipt->payment->paymentMethod == 'credit_card')
-                Thẻ tín dụng
-            @elseif ($selectedReceipt->payment->paymentMethod == 'bank_transfer')
-                Chuyển khoản ngân hàng
-            @elseif ($selectedReceipt->payment->paymentMethod == 'counter_payment')
-                Thanh toán tại quầy
-            @else
-                N/A
-            @endif
-        </p>
-        <p><strong>Trạng thái thanh toán:</strong> 
-            @if ($selectedReceipt->payment->status == 0)
-                Chưa thanh toán
-            @elseif ($selectedReceipt->payment->status == 1)
-                Đã thanh toán
-            @else
-                N/A
-            @endif
-        </p>
+    <p><strong>Hình thức thanh toán:</strong>
+        @if ($selectedReceipt->payment->paymentMethod == 'credit_card')
+        Thẻ tín dụng
+        @elseif ($selectedReceipt->payment->paymentMethod == 'bank_transfer')
+        Chuyển khoản ngân hàng
+        @elseif ($selectedReceipt->payment->paymentMethod == 'counter_payment')
+        Thanh toán tại quầy
+        @else
+        N/A
+        @endif
+    </p>
+    <p><strong>Trạng thái thanh toán:</strong>
+        @if ($selectedReceipt->payment->status == 0)
+        Chưa thanh toán
+        @elseif ($selectedReceipt->payment->status == 1)
+        Đã thanh toán
+        @else
+        N/A
+        @endif
+    </p>
     @else
-        <p>Chưa có thông tin thanh toán.</p>
+    <p>Chưa có thông tin thanh toán.</p>
     @endif
 
     <a href="{{ route('admin.receipts.index') }}" class="btn btn-secondary">Quay lại</a>
@@ -86,10 +87,12 @@
         font-family: 'Arial', sans-serif;
         font-size: 14px;
         width: 100%;
-        table-layout: fixed; /* Giúp bảng tự động điều chỉnh cột */
+        table-layout: fixed;
+        /* Giúp bảng tự động điều chỉnh cột */
     }
 
-    .table th, .table td {
+    .table th,
+    .table td {
         word-wrap: break-word;
         word-break: break-all;
         padding: 8px;
@@ -122,7 +125,8 @@
             font-size: 12px;
         }
 
-        .table th, .table td {
+        .table th,
+        .table td {
             padding: 8px;
         }
     }
