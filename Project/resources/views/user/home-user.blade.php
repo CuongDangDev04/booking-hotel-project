@@ -14,10 +14,10 @@
                       <img class="w-100" src="img/carousel-1.jpg" alt="Image">
                       <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                           <div class="p-3" style="max-width: 700px;">
-                              <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">Luxury Living</h6>
-                              <h1 class="display-3 text-white mb-4 animated slideInDown">Discover A Brand Luxurious Hotel</h1>
-                              <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Our Rooms</a>
-                              <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Book A Room</a>
+                              <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">Phong Cách Thượng Lưu</h6>
+                              <h1 class="display-3 text-white mb-4 animated slideInDown">Đặt phòng nhanh, tận hưởng sang trọng!</h1>
+                              <a href="/room" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Xem Phòng</a>
+                              <a href="/room" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Đặt Phòng</a>
                           </div>
                       </div>
                   </div>
@@ -25,8 +25,8 @@
                       <img class="w-100" src="img/carousel-2.jpg" alt="Image">
                       <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                           <div class="p-3" style="max-width: 700px;">
-                              <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">Luxury Living</h6>
-                              <h1 class="display-3 text-white mb-4 animated slideInDown">Discover A Brand Luxurious Hotel</h1>
+                              <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">Phong Cách Thượng Lưu</h6>
+                              <h1 class="display-3 text-white mb-4 animated slideInDown">Nơi hành trình của bạn bắt đầu với sự thoải mái</h1>
                               <a href="" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Our Rooms</a>
                               <a href="" class="btn btn-light py-md-3 px-md-5 animated slideInRight">Book A Room</a>
                           </div>
@@ -100,9 +100,9 @@
           <div class="container">
               <div class="row g-5 align-items-center">
                   <div class="col-lg-6">
-                      <h6 class="section-title text-start text-primary text-uppercase">About Us</h6>
-                      <h1 class="mb-4">Welcome to <span class="text-primary text-uppercase">Hotelier</span></h1>
-                      <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
+                      <h6 class="section-title text-start text-primary text-uppercase">Giới Thiệu</h6>
+                      <h1 class="mb-4">Chào mừng đến với <span class="text-primary text-uppercase">Hotelier</span></h1>
+                      <p class="mb-4">Nơi mang đến cho bạn trải nghiệm nghỉ dưỡng đẳng cấp, dịch vụ chuyên nghiệp và không gian tuyệt vời nhất.</p>
                       <div class="row g-3 pb-4">
                           <div class="col-sm-4 wow fadeIn" data-wow-delay="0.1s">
                               <div class="border rounded p-1">
@@ -132,7 +132,7 @@
                               </div>
                           </div>
                       </div>
-                      <a class="btn btn-primary py-3 px-5 mt-2" href="">Explore More</a>
+                      <a class="btn btn-primary py-3 px-5 mt-2" href="">Khám Phá</a>
                   </div>
                   <div class="col-lg-6">
                       <div class="row g-3">
@@ -265,11 +265,10 @@
           <div class="row g-0">
               <div class="col-md-6 bg-dark d-flex align-items-center">
                   <div class="p-5">
-                      <h6 class="section-title text-start text-white text-uppercase mb-3">Luxury Living</h6>
-                      <h1 class="text-white mb-4">Discover A Brand Luxurious Hotel</h1>
-                      <p class="text-white mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                      <a href="" class="btn btn-primary py-md-3 px-md-5 me-3">Our Rooms</a>
-                      <a href="" class="btn btn-light py-md-3 px-md-5">Book A Room</a>
+                      <h6 class="section-title text-start text-white text-uppercase mb-3">Phong Cách Thượng Lưu</h6>
+                      <h1 class="text-white mb-4">Đặt phòng nhanh, tận hưởng sang trọng!</h1>
+                      <a href="" class="btn btn-primary py-md-3 px-md-5 me-3">Xem Phòng</a>
+                      <a href="" class="btn btn-light py-md-3 px-md-5">Đặt Phòng Ngay</a>
                   </div>
               </div>
               <div class="col-md-6">
@@ -306,8 +305,8 @@
       <div class="container-xxl py-5">
           <div class="container">
               <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                  <h6 class="section-title text-center text-primary text-uppercase">Our Services</h6>
-                  <h1 class="mb-5">Explore Our <span class="text-primary text-uppercase">Services</span></h1>
+                  <h6 class="section-title text-center text-primary text-uppercase">Dịch Vụ Của Chúng Tôi</h6>
+                  <h1 class="mb-5">Khám Phá<span class="text-primary text-uppercase">Dịch Vụ</span></h1>
               </div>
               <div class="row g-4">
                   <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -317,8 +316,8 @@
                                   <i class="fa fa-hotel fa-2x text-primary"></i>
                               </div>
                           </div>
-                          <h5 class="mb-3">Rooms & Appartment</h5>
-                          <p class="text-body mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                          <h5 class="mb-3">Phòng Và Căn Hộ</h5>
+                          <p class="text-body mb-0">Cung cấp các phòng nghỉ hiện đại và căn hộ tiện nghi, phù hợp cho mọi nhu cầu lưu trú của bạn.</p>
                       </a>
                   </div>
                   <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
@@ -328,8 +327,8 @@
                                   <i class="fa fa-utensils fa-2x text-primary"></i>
                               </div>
                           </div>
-                          <h5 class="mb-3">Food & Restaurant</h5>
-                          <p class="text-body mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                          <h5 class="mb-3">Ẩm Thực & Nhà Hàng Cao Cấp</h5>
+                          <p class="text-body mb-0">Thưởng thức ẩm thực đa dạng với các món ăn đặc sắc từ khắp nơi trên thế giới.</p>
                       </a>
                   </div>
                   <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
@@ -339,8 +338,8 @@
                                   <i class="fa fa-spa fa-2x text-primary"></i>
                               </div>
                           </div>
-                          <h5 class="mb-3">Spa & Fitness</h5>
-                          <p class="text-body mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                          <h5 class="mb-3">Thư Giãn & Sức Khỏe Toàn Diện</h5>
+                          <p class="text-body mb-0">Thư giãn và phục hồi năng lượng với dịch vụ spa cao cấp và phòng tập hiện đại.</p>
                       </a>
                   </div>
                   <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.4s">
@@ -350,8 +349,8 @@
                                   <i class="fa fa-swimmer fa-2x text-primary"></i>
                               </div>
                           </div>
-                          <h5 class="mb-3">Sports & Gaming</h5>
-                          <p class="text-body mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                          <h5 class="mb-3">Thể Thao & Giải Trí Sôi Động</h5>
+                          <p class="text-body mb-0">Trải nghiệm thể thao và giải trí thú vị với các tiện ích chuyên nghiệp.</p>
                       </a>
                   </div>
                   <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
@@ -361,8 +360,8 @@
                                   <i class="fa fa-glass-cheers fa-2x text-primary"></i>
                               </div>
                           </div>
-                          <h5 class="mb-3">Event & Party</h5>
-                          <p class="text-body mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                          <h5 class="mb-3">Sự Kiện & Tiệc Tùng Hoàn Hảo</h5>
+                          <p class="text-body mb-0">Địa điểm hoàn hảo để tổ chức sự kiện và các bữa tiệc đáng nhớ.</p>
                       </a>
                   </div>
                   <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
@@ -372,8 +371,8 @@
                                   <i class="fa fa-dumbbell fa-2x text-primary"></i>
                               </div>
                           </div>
-                          <h5 class="mb-3">GYM & Yoga</h5>
-                          <p class="text-body mb-0">Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam sed stet lorem.</p>
+                          <h5 class="mb-3">Tập Luyện & Thư Giãn Đỉnh Cao"</h5>
+                          <p class="text-body mb-0">Rèn luyện sức khỏe và thư giãn tinh thần với các lớp yoga và phòng tập gym tiên tiến.</p>
                       </a>
                   </div>
               </div>
@@ -387,42 +386,11 @@
       <div class="container-xxl py-5">
           <div class="container">
               <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                  <h6 class="section-title text-center text-primary text-uppercase">Our Team</h6>
+                  <h6 class="section-title text-center text-primary text-uppercase">Đội Ngũ Của Chúng Tôi</h6>
                   <h1 class="mb-5">Explore Our <span class="text-primary text-uppercase">Staffs</span></h1>
               </div>
               <div class="row g-4">
-                  <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                      <div class="rounded shadow overflow-hidden">
-                          <div class="position-relative">
-                              <img class="img-fluid" src="img/team-1.jpg" alt="">
-                              <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                                  <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                  <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                  <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
-                              </div>
-                          </div>
-                          <div class="text-center p-4 mt-3">
-                              <h5 class="fw-bold mb-0">Full Name</h5>
-                              <small>Designation</small>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                      <div class="rounded shadow overflow-hidden">
-                          <div class="position-relative">
-                              <img class="img-fluid" src="img/team-2.jpg" alt="">
-                              <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                                  <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                  <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                  <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
-                              </div>
-                          </div>
-                          <div class="text-center p-4 mt-3">
-                              <h5 class="fw-bold mb-0">Full Name</h5>
-                              <small>Designation</small>
-                          </div>
-                      </div>
-                  </div>
+                  <div class="col-lg-3"></div>
                   <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
                       <div class="rounded shadow overflow-hidden">
                           <div class="position-relative">
@@ -455,6 +423,8 @@
                           </div>
                       </div>
                   </div>
+                  <div class="col-lg-3"></div>
+
               </div>
           </div>
       </div>

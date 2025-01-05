@@ -11,7 +11,7 @@
                  <div class="col-lg-7 px-5 text-start">
                      <div class="h-100 d-inline-flex align-items-center py-2 me-4">
                          <i class="fa fa-envelope text-primary me-2"></i>
-                         <p class="mb-0">info@example.com</p>
+                         <p class="mb-0">dainam15986@gmail.com</p>
                      </div>
                      <div class="h-100 d-inline-flex align-items-center py-2">
                          <i class="fa fa-phone-alt text-primary me-2"></i>
@@ -37,11 +37,11 @@
                  </button>
                  <div class="collapse navbar-collapse justify-content-around" id="navbarCollapse">
                      <div class="navbar-nav mr-auto py-0">
-                         <a href="/" class="nav-item nav-link {{ request()->is('/') ? 'active' : '' }}">Home</a>
-                         <a href="/about" class="nav-item nav-link {{ request()->is('about') ? 'active' : '' }}">About</a>
-                         <a href="/room" class="nav-item nav-link {{ request()->is('room') ? 'active' : '' }}">Rooms</a>
+                         <a href="/" class="nav-item nav-link {{ request()->is('/') ? 'active' : '' }}">Trang Chủ</a>
+                         <a href="/about" class="nav-item nav-link {{ request()->is('about') ? 'active' : '' }}">Giới Thiệu</a>
+                         <a href="/room" class="nav-item nav-link {{ request()->is('room') ? 'active' : '' }}">Phòng</a>
 
-                         <a href="/contact" class="nav-item nav-link {{ request()->is('contact') ? 'active' : '' }}">Contact</a>
+                         <a href="/contact" class="nav-item nav-link {{ request()->is('contact') ? 'active' : '' }}">Liên Hệ</a>
                      </div>
                      @if (Route::has('login'))
                      <div class="d-flex justify-content-end" style="width:20%;">

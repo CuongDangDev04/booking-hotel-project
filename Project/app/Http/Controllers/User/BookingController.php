@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Booking;
 use App\Models\Customer;
+use App\Models\DetailReceipt;
 use App\Models\Payment;
 use App\Models\Receipt;
 use App\Models\Room;
@@ -194,14 +195,25 @@ class BookingController extends Controller
         $receipt->status = 1;
         $receipt->save();
 
-        $booking = Booking::whereHas('receipts', function ($query) use ($receipt_id) {
-            $query->where('detail_receipts.receipt_id', $receipt_id); 
-        })->first();
+        $detailReceipt = DetailReceipt::find('receipt_id', $receipt_id);
 
-        if ($booking) {
-            $booking->status = 1;  
-            $booking->save();
+        foreach ($detailReceipt as $detail) {
+            $booking = Booking::find($detail->booking_id);
+
+            if ($booking) {
+                $booking->status = 1;
+                $booking->save();
+            }
         }
+
+        // $booking = Booking::whereHas('receipts', function ($query) use ($receipt_id) {
+        //     $query->where('detail_receipts.receipt_id', $receipt_id);
+        // })->first();
+
+        // if ($booking) {
+        //     $booking->status = 1;
+        //     $booking->save();
+        // }
 
         return redirect('/')->with('success', 'Đặt phòng thành công! Hãy kiểm tra email của bạn để xem thông tin chi tiết.');
     }
