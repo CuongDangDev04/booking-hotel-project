@@ -195,25 +195,16 @@ class BookingController extends Controller
         $receipt->status = 1;
         $receipt->save();
 
-        $detailReceipt = DetailReceipt::find('receipt_id', $receipt_id);
+        $detailReceipt = DetailReceipt::where('receipt_id', $receipt_id)->get();
 
-        foreach ($detailReceipt as $detail) {
-            $booking = Booking::find($detail->booking_id);
-
+        foreach ($detailReceipt as $detai) {
+            $booking = Booking::find($detai->booking_id);
             if ($booking) {
                 $booking->status = 1;
                 $booking->save();
             }
         }
 
-        // $booking = Booking::whereHas('receipts', function ($query) use ($receipt_id) {
-        //     $query->where('detail_receipts.receipt_id', $receipt_id);
-        // })->first();
-
-        // if ($booking) {
-        //     $booking->status = 1;
-        //     $booking->save();
-        // }
 
         return redirect('/')->with('success', 'Đặt phòng thành công! Hãy kiểm tra email của bạn để xem thông tin chi tiết.');
     }
