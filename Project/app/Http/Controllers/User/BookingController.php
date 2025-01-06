@@ -35,6 +35,32 @@ class BookingController extends Controller
 
         // dd($firstname, $lastname, $email, $phone, $address, $checkin, $checkout, $totalRoom, $adults, $children);
 
+        $_checkin = strtotime($checkin);
+        $_checkout = strtotime($checkout);
+        $daysOfWeek = [
+            "Chủ Nhật",
+            "Thứ 2",
+            "Thứ 3",
+            "Thứ 4",
+            "Thứ 5",
+            "Thứ 6",
+            "Thứ 7"
+        ];
+        $dayOfWeek_checkin = $daysOfWeek[date("w", $_checkin)];
+        $dayOfWeek_checkout = $daysOfWeek[date("w", $_checkout)];
+
+        $day_checkin = date("d", $_checkin);
+        $day_checkout = date("d", $_checkout);
+
+        $month_checkin = date("m", $_checkin);
+        $month_checkout = date("m", $_checkout);
+
+        $year_checkin = date("Y", $_checkin);
+        $year_checkout = date("Y", $_checkout);
+
+        $totalDays = $_checkout - $_checkin;
+        $totalDays = $totalDays / (60 * 60 * 24);
+
         $errors = [];
         if (strtotime($checkin) >= strtotime($checkout)) {
             $errors['date'] = 'Ngày nhận phòng phải nhỏ hơn ngày trả phòng.';
@@ -79,7 +105,7 @@ class BookingController extends Controller
             ]);
             $receipt = Receipt::create([
                 'issueDate' => date('Y-m-d'),
-                'totalAmount' => $roomType->price * $totalRoom,
+                'totalAmount' => $roomType->price * $totalRoom * $totalDays,
                 'status' => 0,
                 'payment_id' => null,
             ]);
@@ -107,31 +133,7 @@ class BookingController extends Controller
             return back()->withErrors(['room' => 'Số phòng khả dụng: ' . $availableRooms]);
         }
 
-        $_checkin = strtotime($checkin);
-        $_checkout = strtotime($checkout);
-        $daysOfWeek = [
-            "Chủ Nhật",
-            "Thứ 2",
-            "Thứ 3",
-            "Thứ 4",
-            "Thứ 5",
-            "Thứ 6",
-            "Thứ 7"
-        ];
-        $dayOfWeek_checkin = $daysOfWeek[date("w", $_checkin)];
-        $dayOfWeek_checkout = $daysOfWeek[date("w", $_checkout)];
 
-        $day_checkin = date("d", $_checkin);
-        $day_checkout = date("d", $_checkout);
-
-        $month_checkin = date("m", $_checkin);
-        $month_checkout = date("m", $_checkout);
-
-        $year_checkin = date("Y", $_checkin);
-        $year_checkout = date("Y", $_checkout);
-
-        $totalDays = $_checkout - $_checkin;
-        $totalDays = $totalDays / (60 * 60 * 24);
 
         //===================================================================================================
         return view('user.payment-user', [
@@ -207,5 +209,33 @@ class BookingController extends Controller
 
 
         return redirect('/')->with('success', 'Đặt phòng thành công! Hãy kiểm tra email của bạn để xem thông tin chi tiết.');
+    }
+    public function cancelBooking($id)
+    {
+        $booking = Booking::findOrFail($id);
+
+
+        $detailReceipt = DetailReceipt::where('booking_id', $booking->booking_id)->first();
+
+
+        if ($detailReceipt) {
+            $receipt_id = $detailReceipt->receipt_id;
+            $detailReceipts = DetailReceipt::where('receipt_id', $receipt_id)->get();
+            $receipt = Receipt::findOrFail($receipt_id);
+            $refund = 0;
+            if ($detailReceipts->count() > 1) {
+                $refund += $detailReceipt->price;
+                $receipt->totalAmount -= $refund;
+                $receipt->save();
+                $booking->delete();
+            } else {
+                $booking->delete();
+                $receipt->delete();
+            }
+        }
+
+        $booking->delete();
+
+        return redirect()->route('dashboard.bookings');
     }
 }

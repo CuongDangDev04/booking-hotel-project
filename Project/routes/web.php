@@ -9,8 +9,12 @@ use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\User\BookingController;
+use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\RoomController;
 use App\Models\Booking;
+use App\Models\Room;
+use App\Models\RoomType;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Monolog\Handler\RotatingFileHandler;
 
@@ -26,9 +30,7 @@ use Monolog\Handler\RotatingFileHandler;
 */
 
 
-Route::get('/', function () {
-    return view('user.home-user');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', function () {
     return view('user.about-user');
 });
@@ -65,7 +67,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard/user-info', [DashboardController::class, 'userInfo'])->name('dashboard.userInfo');
     Route::get('/dashboard/bookings', [DashboardController::class, 'bookings'])->name('dashboard.bookings');
 });
-
+Route::delete('/user/bookings/{id}', [BookingController::class, 'cancelBooking'])
+    ->name('user.bookings.cancel');
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('room-types', AdminRoomTypeController::class);
 });

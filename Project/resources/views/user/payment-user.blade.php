@@ -171,7 +171,7 @@
                 <h6 class="title p-2 text-center">Tóm tắt chi phí</h6>
                 <ul class="list-unstyled p-3 mb-0">
                     @foreach($rooms as $room)
-                    <li class="d-flex justify-content-between"><span>{{$roomType->name}}: </span><span>{{$roomType->price}}</span></li>
+                    <li class="d-flex justify-content-between"><span>{{$roomType->name}}: </span><span>{{$roomType->price * $totalDays}}</span></li>
                     @endforeach
                 </ul>
                 <p class="total-amount d-flex justify-content-between p-3 pt-0">

@@ -24,13 +24,14 @@
                                 <th>Ngày trả phòng</th>
                                 <th>Giá</th>
                                 <th>Trạng thái</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($bookings as $index => $booking)
                             <tr>
                                 <td>{{ $index + 1 }}</td>
-                                <td>{{ $booking->room->name }}</td>
+                                <td>{{ $booking->room->roomNo }}</td>
                                 <td>{{ $booking->checkin }}</td>
                                 <td>{{ $booking->checkout }}</td>
                                 <td>{{ number_format($booking->totalPrice, 0, ',', '.') }} VND</td>
@@ -42,6 +43,13 @@
                                     @else
                                     Đã hủy
                                     @endif
+                                </td>
+                                <td>
+                                    <form action="{{ route('user.bookings.cancel', $booking->booking_id) }}" method="POST" onsubmit="return confirm('Bạn có chắc chắn muốn hủy đặt phòng này không?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Hủy đặt phòng</button>
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach
