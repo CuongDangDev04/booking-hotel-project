@@ -98,7 +98,7 @@
 <div class="qr-payment-container">
     <p class="qr-payment-title">Quét mã QR để thanh toán</p>
     <div class="qr-code-image">
-        <img src="{{ asset('img/qr_bank-transfer.png') }}" alt="QR Code">
+        <img src="{{ $qrCodeUrl }}" alt="QR Code">
     </div>
     <p class="qr-note">Vui lòng sử dụng ứng dụng ngân hàng để quét mã QR và hoàn tất thanh toán.</p>
     <p class="text-center text-primary">Ấn tiếp tục nếu đã thanh toán</p>

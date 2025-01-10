@@ -13,6 +13,7 @@
         "laravel/tinker": "^2.8",
         "mpdf/mpdf": "^6.1",
         "setasign/fpdf": "*",
+        "simplesoftwareio/simple-qrcode": "^4.2",
         "tecnickcom/tcpdf": "^6.8"
     },
     "require-dev": {
