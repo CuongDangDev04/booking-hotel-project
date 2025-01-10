@@ -11,9 +11,12 @@ use App\Models\Receipt;
 use App\Models\Room;
 use App\Models\RoomType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class BookingController extends Controller
 {
+    protected $vietQRProvider;
     public function bookingRoom(Request $request)
     {
         $user_id = null;
@@ -109,7 +112,7 @@ class BookingController extends Controller
                 'status' => 0,
                 'payment_id' => null,
             ]);
-            $totalAmount = $roomType->price * $totalRoom;
+            $totalAmount = $roomType->price * $totalRoom * $totalDays;
             foreach ($rooms as $room) {
 
                 $booking = Booking::create([
@@ -123,7 +126,7 @@ class BookingController extends Controller
                     'totalPrice' => $roomType->price,
                     'status' => 0,
                 ]);
-                $detailReceipt = $booking->receipts()->attach($receipt->receipt_id, ['price' => $roomType->price]);
+                $detailReceipt = $booking->receipts()->attach($receipt->receipt_id, ['price' => $roomType->price * $totalDays]);
                 $room->status = 1;
                 $room->save();
             }
@@ -167,16 +170,34 @@ class BookingController extends Controller
         $address = $request->input('address');
         $receipt_id = (int) $request->input('receipt_id');
         $paymentMethod = $request->input('payment_method');
+
+        $receipt = Receipt::find($receipt_id);
+
         if ($paymentMethod == 'cash') {
-            $receipt = Receipt::find($receipt_id);
             return redirect('/')->with('success', 'Đặt phòng thành công! Hãy chuẩn bị số tiền tương ứng khi nhận phòng.');
         } else if ($paymentMethod == 'bank_transfer' || $paymentMethod == 'credit_card') {
-            $receipt = Receipt::find($receipt_id);
-            // dd($receipt);
-            return view('user.paying-user', [
-                'receipt' => $receipt,
-                'paymentMethod' => $paymentMethod
+            $amount = $receipt->totalAmount;
+            // dump($receipt);
+            $qrResponse = Http::post('https://api.vietqr.io/v2/generate', [
+                'accountNo' => 1027556071,
+                'accountName' => 'Nguyen Dai Nam',
+                'bankCode' => 'VCB',
+                'amount' => intval($amount),
+                "addInfo" => "Thanh toán hóa đơn $receipt_id",
+                "acqId" => 970436,
+                "template" => "compact",
             ]);
+            // dd($qrResponse->json());
+            if ($qrResponse->successful()) {
+                $qrCodeUrl = $qrResponse->json()['data']['qrDataURL'];
+                return view('user.paying-user', [
+                    'receipt' => $receipt,
+                    'paymentMethod' => $paymentMethod,
+                    'qrCodeUrl' => $qrCodeUrl,
+                ]);
+            } else {
+                return redirect()->back()->with('error', 'Không thể tạo mã QR. Vui lòng thử lại!');
+            }
         }
     }
 
