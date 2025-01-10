@@ -14,7 +14,8 @@ class AdminServiceController extends Controller
         $sortOrder = $request->get('sort_order', 'asc');
         $services = Service::
             orderBy($sortBy, $sortOrder)
-            ->get() ;
+            ->paginate(7);
+
         return view('admin.services.index', compact('services', 'sortBy', 'sortOrder'));
     }
 

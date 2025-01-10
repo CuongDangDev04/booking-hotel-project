@@ -129,6 +129,9 @@
            
         </tbody>
     </table>
+    <div class="pagination">
+                {{ $users->links() }}
+            </div>
 </div>
 
 <!-- Create Modal -->

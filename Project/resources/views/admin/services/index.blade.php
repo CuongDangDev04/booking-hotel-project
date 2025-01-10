@@ -85,6 +85,9 @@
             @endforeach
         </tbody>
     </table>
+    <div class="pagination">
+        {{ $services->links() }}
+    </div>
 </div>
 
 <!-- Add Service Modal -->
@@ -153,6 +156,7 @@
         background-color: #343a40;
         color: white;
     }
+
     .sort-icons {
         margin-left: 5px;
     }

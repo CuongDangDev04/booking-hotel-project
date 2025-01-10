@@ -15,8 +15,7 @@ class AdminReceiptController extends Controller
         $sortBy = $request->get('sort_by', 'receipt_id'); // Mặc định sắp xếp theo ID
         $sortOrder = $request->get('sort_order', 'asc'); // Mặc định sắp xếp theo thứ tự tăng dần
 
-        // Sắp xếp hóa đơn theo tham số được gửi đến
-        $receipts = Receipt::orderBy($sortBy, $sortOrder)->paginate(10);
+        $receipts = Receipt::orderBy($sortBy, $sortOrder)->paginate(7);
 
         $selectedReceipt = null;
 

@@ -10,14 +10,14 @@ use Illuminate\Http\Request;
 class AdminRoomTypeController extends Controller
 {
     public function index(Request $request)
-{
-    $sortBy = $request->get('sort_by', 'roomType_id');
-    $sortOrder = $request->get('sort_order', 'asc');
-    $roomTypes = RoomType::orderBy($sortBy, $sortOrder)->get();
-    $services = Service::all(); // Lấy tất cả dịch vụ
+    {
+        $sortBy = $request->get('sort_by', 'roomType_id');
+        $sortOrder = $request->get('sort_order', 'asc');
+        $roomTypes = RoomType::orderBy($sortBy, $sortOrder)->paginate(7);
+        $services = Service::all(); 
 
-    return view('admin.room-types.index', compact('roomTypes', 'sortBy', 'sortOrder', 'services'));
-}
+        return view('admin.room-types.index', compact('roomTypes', 'sortBy', 'sortOrder', 'services'));
+    }
 
 
     public function store(Request $request)

@@ -17,7 +17,8 @@ class AdminUserController extends Controller
 
         $users = User::where('role', 'user')  
             ->orderBy($sortBy, $sortOrder)    
-            ->get();
+            ->paginate(7);
+
 
         return view('admin.users.index', compact('users', 'sortBy', 'sortOrder'));
     }

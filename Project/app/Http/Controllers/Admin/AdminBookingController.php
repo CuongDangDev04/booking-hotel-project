@@ -14,21 +14,18 @@ class AdminBookingController extends Controller
         $sortBy = $request->input('sort_by', 'booking_id');
         $sortOrder = $request->input('sort_order', 'asc');
 
-        // Lấy danh sách các phòng đang được đặt trong thời điểm hiện tại
         $bookedRoomIds = Booking::where('checkin', '<=', now())
             ->where('checkout', '>=', now())
             ->pluck('room_id');
 
-        // Lấy danh sách tất cả các phòng
         $allRooms = Room::all();
 
-        // Lọc danh sách phòng trống
         $availableRooms = $allRooms->whereNotIn('room_id', $bookedRoomIds);
 
-        // Lấy danh sách booking (nếu cần)
         $bookings = Booking::with(['customer', 'room', 'user'])
             ->orderBy($sortBy, $sortOrder)
-            ->get();
+            ->paginate(7);
+
 
         return view('admin.bookings.index', compact('bookings', 'sortBy', 'sortOrder', 'availableRooms'));
     }

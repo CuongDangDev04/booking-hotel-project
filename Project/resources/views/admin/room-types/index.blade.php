@@ -142,6 +142,9 @@
             @endforeach
         </tbody>
     </table>
+    <div class="pagination">
+                {{ $roomTypes->links() }}
+            </div>
 </div>
 
 <!-- Create Modal -->

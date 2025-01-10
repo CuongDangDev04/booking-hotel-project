@@ -112,8 +112,13 @@
                 </div>
             </div>
             @endforeach
+            
+
         </tbody>
     </table>
+    <div class="pagination">
+                {{ $bookings->links() }}
+            </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -155,6 +160,7 @@
         background-color: #343a40;
         color: white;
     }
+
     .sort-icons {
         margin-left: 5px;
     }

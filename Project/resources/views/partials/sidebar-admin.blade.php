@@ -40,6 +40,12 @@
                 <span>Quản lí hóa đơn</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a href="contacts">
+                <i class="far fa-chart-bar"></i>
+                <span>Quản lí liên hệ</span>
+            </a>
+        </li>
 
       
 </div>

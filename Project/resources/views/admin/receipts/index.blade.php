@@ -83,10 +83,11 @@
                     @endforeach
                 </tbody>
             </table>
-
-            <div class="pagination-wrapper">
+            <div class="pagination">
                 {{ $receipts->links() }}
             </div>
+
+           
         </div>
 
         <!-- Chi tiết hóa đơn -->

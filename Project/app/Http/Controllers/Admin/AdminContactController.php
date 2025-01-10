@@ -9,14 +9,14 @@ use Illuminate\Http\Request;
 class AdminContactController extends Controller
 {
     public function index(Request $request)
-{
-    $sortBy = $request->get('sort_by', 'id');  
-    $sortOrder = $request->get('sort_order', 'asc');  
+    {
+        $sortBy = $request->get('sort_by', 'id');
+        $sortOrder = $request->get('sort_order', 'asc');
 
-    $contacts = Contact::orderBy($sortBy, $sortOrder)->get();
+        $contacts = Contact::orderBy($sortBy, $sortOrder)->paginate(7);
 
-    return view('admin.contacts.index', compact('contacts', 'sortBy', 'sortOrder'));
-}
+        return view('admin.contacts.index', compact('contacts', 'sortBy', 'sortOrder'));
+    }
 
 
     // Thêm liên hệ từ form user

@@ -16,7 +16,7 @@ class AdminRoomController extends Controller
 
     $rooms = Room::with('roomType')
                  ->orderBy($sortBy, $sortOrder)
-                 ->paginate(10);
+                 ->paginate(7);
 
     $roomTypes = RoomType::all();
 
