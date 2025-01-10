@@ -12,7 +12,12 @@ class AdminReceiptController extends Controller
 {
     public function index(Request $request)
     {
-        $receipts = Receipt::paginate(10);
+        $sortBy = $request->get('sort_by', 'receipt_id'); // Mặc định sắp xếp theo ID
+        $sortOrder = $request->get('sort_order', 'asc'); // Mặc định sắp xếp theo thứ tự tăng dần
+
+        // Sắp xếp hóa đơn theo tham số được gửi đến
+        $receipts = Receipt::orderBy($sortBy, $sortOrder)->paginate(10);
+
         $selectedReceipt = null;
 
         if ($request->has('id')) {
@@ -20,7 +25,7 @@ class AdminReceiptController extends Controller
                 ->find($request->get('id'));
         }
 
-        return view('admin.receipts.index', compact('receipts', 'selectedReceipt'));
+        return view('admin.receipts.index', compact('receipts', 'selectedReceipt', 'sortBy', 'sortOrder'));
     }
 
     public function show($id)
@@ -59,7 +64,7 @@ class AdminReceiptController extends Controller
         // Khởi tạo đối tượng TCPDF
         $pdf = new TCPDF();
 
-       
+
 
         // Thêm trang mới
         $pdf->AddPage();

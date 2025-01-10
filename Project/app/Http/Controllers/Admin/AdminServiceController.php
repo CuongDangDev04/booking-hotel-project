@@ -10,7 +10,7 @@ class AdminServiceController extends Controller
 {
     public function index(Request $request)
     {
-        $sortBy = $request->get('sort_by', 'name', 'service_id');
+        $sortBy = $request->get('sort_by', 'service_id');
         $sortOrder = $request->get('sort_order', 'asc');
         $services = Service::
             orderBy($sortBy, $sortOrder)

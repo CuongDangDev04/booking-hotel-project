@@ -15,31 +15,37 @@
     <table class="table table-bordered table-striped table-hover">
         <thead class="table-dark ">
             <tr>
-            <th>
+                <th>
                     <a href="{{ route('admin.users.index', ['sort_by' => 'id', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
                         ID
-                        <i class="fa fa-arrow-up"></i>
-                        <i class="fa fa-arrow-down"></i>
+                        <span class="sort-icons">
+                            <i class="fa fa-arrow-up {{ $sortBy === 'id' && $sortOrder === 'asc' ? 'active' : '' }}"></i>
+                            <i class="fa fa-arrow-down {{ $sortBy === 'id' && $sortOrder === 'desc' ? 'active' : '' }}"></i>
+                        </span>
                     </a>
                 </th>
                 <th>
                     <a href="{{ route('admin.users.index', ['sort_by' => 'name', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
                         Tên
-                        <i class="fa fa-arrow-up"></i>
-                        <i class="fa fa-arrow-down"></i>
+                        <span class="sort-icons">
+                            <i class="fa fa-arrow-up {{ $sortBy === 'name' && $sortOrder === 'asc' ? 'active' : '' }}"></i>
+                            <i class="fa fa-arrow-down {{ $sortBy === 'name' && $sortOrder === 'desc' ? 'active' : '' }}"></i>
+                        </span>
                     </a>
                 </th>
                 <th>
                     <a href="{{ route('admin.users.index', ['sort_by' => 'email', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
                         Email
-                        <i class="fa fa-arrow-up"></i>
-                        <i class="fa fa-arrow-down"></i>
+                        <span class="sort-icons">
+                            <i class="fa fa-arrow-up {{ $sortBy === 'email' && $sortOrder === 'asc' ? 'active' : '' }}"></i>
+                            <i class="fa fa-arrow-down {{ $sortBy === 'email' && $sortOrder === 'desc' ? 'active' : '' }}"></i>
+                        </span>
                     </a>
                 </th>
                 <th>
-                    <a >
+                    <a>
                         Vai Trò
-                        
+
                     </a>
                 </th>
                 <th>Hành Động</th>
@@ -71,7 +77,9 @@
                     <a href="{{ route('admin.users.toggleActiveStatus', $user->id) }}" class="btn btn-success btn-sm">Kích hoạt</a>
                     @endif
                 </td>
+                
             </tr>
+          
 
             <!-- Edit Modal -->
             <div class="modal fade" id="editUserModal{{ $user->id }}" tabindex="-1" aria-labelledby="editUserModalLabel{{ $user->id }}" aria-hidden="true">
@@ -118,6 +126,7 @@
                 </div>
             </div>
             @endforeach
+           
         </tbody>
     </table>
 </div>
@@ -286,6 +295,19 @@
     .title-manager-user {
         font-size: 42px;
         font-weight: bold;
+    }
+
+    .sort-icons {
+        margin-left: 5px;
+    }
+
+    .sort-icons i {
+        font-size: 12px;
+        color: #ccc;
+    }
+
+    .sort-icons i.active {
+        color: #000;
     }
 </style>
 

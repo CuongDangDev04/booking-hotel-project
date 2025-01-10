@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminBookingController;
+use App\Http\Controllers\Admin\AdminContactController;
 use App\Http\Controllers\Admin\AdminReceiptController;
 use App\Http\Controllers\Admin\AdminRoomController;
 use App\Http\Controllers\Admin\AdminRoomTypeController;
@@ -95,5 +96,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::get('receipts/{id}', [AdminReceiptController::class, 'show'])->name('receipts.show');
 });
+Route::get('admin/receipts', [AdminReceiptController::class, 'index'])->name('admin.receipts.index');
+
 Route::delete('admin/receipts/{id}', [AdminReceiptController::class, 'destroy'])->name('admin.receipts.destroy');
 Route::get('/admin/receipts/{id}/export', [AdminReceiptController::class, 'exportPDF'])->name('admin.receipts.export');
+
+Route::post('/contact', [AdminContactController::class, 'store'])->name('contact.store');
+Route::get('/admin/contacts', [AdminContactController::class, 'index'])->name('admin.contacts.index');
+Route::delete('/admin/contacts/{id}', [AdminContactController::class, 'destroy'])->name('admin.contacts.destroy');

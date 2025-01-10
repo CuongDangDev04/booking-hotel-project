@@ -13,9 +13,33 @@
             <table class="table table-bordered table-hover table-striped">
                 <thead class="table-dark">
                     <tr>
-                        <th>ID</th>
-                        <th>Ngày phát hành</th>
-                        <th>Tổng tiền</th>
+                        <th>
+                            <a href="{{ route('admin.receipts.index', ['sort_by' => 'receipt_id', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
+                                ID
+                                <span class="sort-icons">
+                                    <i class="fa fa-arrow-up {{ $sortBy === 'receipt_id' && $sortOrder === 'asc' ? 'active' : '' }}"></i>
+                                    <i class="fa fa-arrow-down {{ $sortBy === 'receipt_id' && $sortOrder === 'desc' ? 'active' : '' }}"></i>
+                                </span>
+                            </a>
+                        </th>
+                        <th>
+                            <a href="{{ route('admin.receipts.index', ['sort_by' => 'issueDate', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
+                                Ngày phát hành
+                                <span class="sort-icons">
+                                    <i class="fa fa-arrow-up {{ $sortBy === 'issueDate' && $sortOrder === 'asc' ? 'active' : '' }}"></i>
+                                    <i class="fa fa-arrow-down {{ $sortBy === 'issueDate' && $sortOrder === 'desc' ? 'active' : '' }}"></i>
+                                </span>
+                            </a>
+                        </th>
+                        <th>
+                            <a href="{{ route('admin.receipts.index', ['sort_by' => 'totalAmount', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
+                                Tổng tiền
+                                <span class="sort-icons">
+                                    <i class="fa fa-arrow-up {{ $sortBy === 'totalAmount' && $sortOrder === 'asc' ? 'active' : '' }}"></i>
+                                    <i class="fa fa-arrow-down {{ $sortBy === 'totalAmount' && $sortOrder === 'desc' ? 'active' : '' }}"></i>
+                                </span>
+                            </a>
+                        </th>
                         <th>Trạng thái</th>
                         <th>Khách hàng</th>
                         <th>Chi tiết</th>
@@ -54,7 +78,6 @@
                                 @method('DELETE')
                                 <button type="button" class="btn btn-danger btn-sm">Xóa</button>
                             </form>
-
                         </td>
                     </tr>
                     @endforeach
@@ -185,6 +208,18 @@
 
     .pagination-wrapper {
         margin-top: 20px;
+    }
+    .sort-icons {
+        margin-left: 5px;
+    }
+
+    .sort-icons i {
+        font-size: 12px;
+        color: #ccc;
+    }
+
+    .sort-icons i.active {
+        color: #000;
     }
 
     /* Cải thiện responsive cho bảng */

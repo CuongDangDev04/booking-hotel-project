@@ -16,29 +16,37 @@
                 <th>
                     <a href="{{ route('admin.room-types.index', ['sort_by' => 'roomType_id', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
                         ID
-                        <i class="fa fa-arrow-up"></i>
-                        <i class="fa fa-arrow-down"></i>
+                        <span class="sort-icons">
+                            <i class="fa fa-arrow-up {{ $sortBy === 'roomType_id' && $sortOrder === 'asc' ? 'active' : '' }}"></i>
+                            <i class="fa fa-arrow-down {{ $sortBy === 'roomType_id' && $sortOrder === 'desc' ? 'active' : '' }}"></i>
+                        </span>
                     </a>
                 </th>
                 <th>
                     <a href="{{ route('admin.room-types.index', ['sort_by' => 'name', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
                         Tên
-                        <i class="fa fa-arrow-up"></i>
-                        <i class="fa fa-arrow-down"></i>
+                        <span class="sort-icons">
+                            <i class="fa fa-arrow-up {{ $sortBy === 'name' && $sortOrder === 'asc' ? 'active' : '' }}"></i>
+                            <i class="fa fa-arrow-down {{ $sortBy === 'name' && $sortOrder === 'desc' ? 'active' : '' }}"></i>
+                        </span>
                     </a>
                 </th>
                 <th>
                     <a href="{{ route('admin.room-types.index', ['sort_by' => 'price', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
                         Giá
-                        <i class="fa fa-arrow-up"></i>
-                        <i class="fa fa-arrow-down"></i>
+                        <span class="sort-icons">
+                            <i class="fa fa-arrow-up {{ $sortBy === 'price' && $sortOrder === 'asc' ? 'active' : '' }}"></i>
+                            <i class="fa fa-arrow-down {{ $sortBy === 'price' && $sortOrder === 'desc' ? 'active' : '' }}"></i>
+                        </span>
                     </a>
                 </th>
                 <th>
                     <a href="{{ route('admin.room-types.index', ['sort_by' => 'occupancy', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
                         Số Người
-                        <i class="fa fa-arrow-up"></i>
-                        <i class="fa fa-arrow-down"></i>
+                        <span class="sort-icons">
+                            <i class="fa fa-arrow-up {{ $sortBy === 'occupancy' && $sortOrder === 'asc' ? 'active' : '' }}"></i>
+                            <i class="fa fa-arrow-down {{ $sortBy === 'occupancy' && $sortOrder === 'desc' ? 'active' : '' }}"></i>
+                        </span>
                     </a>
                 </th>
                 <th>Mô tả</th>
@@ -270,6 +278,18 @@
 
     th a[aria-sort="descending"] i.fa-arrow-down {
         display: inline-block;
+    }
+    .sort-icons {
+        margin-left: 5px;
+    }
+
+    .sort-icons i {
+        font-size: 12px;
+        color: #ccc;
+    }
+
+    .sort-icons i.active {
+        color: #000;
     }
 </style>
 

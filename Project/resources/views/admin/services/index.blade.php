@@ -18,14 +18,18 @@
                 <th style="width: 100px;">
                     <a href="{{ route('admin.services.index', ['sort_by' => 'service_id', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
                         ID
-                        <i class="fa fa-arrow-up"></i>
-                        <i class="fa fa-arrow-down"></i>
+                        <span class="sort-icons">
+                            <i class="fa fa-arrow-up {{ $sortBy === 'service_id' && $sortOrder === 'asc' ? 'active' : '' }}"></i>
+                            <i class="fa fa-arrow-down {{ $sortBy === 'service_id' && $sortOrder === 'desc' ? 'active' : '' }}"></i>
+                        </span>
                     </a>
                 </th>
                 <th><a href="{{ route('admin.services.index', ['sort_by' => 'name', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
                         ID
-                        <i class="fa fa-arrow-up"></i>
-                        <i class="fa fa-arrow-down"></i>
+                        <span class="sort-icons">
+                            <i class="fa fa-arrow-up {{ $sortBy === 'name' && $sortOrder === 'asc' ? 'active' : '' }}"></i>
+                            <i class="fa fa-arrow-down {{ $sortBy === 'name' && $sortOrder === 'desc' ? 'active' : '' }}"></i>
+                        </span>
                     </a></th>
                 <th>Hành Động</th>
             </tr>
@@ -148,5 +152,17 @@
     .table-dark {
         background-color: #343a40;
         color: white;
+    }
+    .sort-icons {
+        margin-left: 5px;
+    }
+
+    .sort-icons i {
+        font-size: 12px;
+        color: #ccc;
+    }
+
+    .sort-icons i.active {
+        color: #000;
     }
 </style>

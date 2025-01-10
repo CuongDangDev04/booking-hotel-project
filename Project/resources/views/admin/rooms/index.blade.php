@@ -16,36 +16,46 @@
                 <th>
                     <a href="{{ route('admin.rooms.index', ['sort_by' => 'room_id', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
                         ID
-                        <i class="fa fa-arrow-up"></i>
-                        <i class="fa fa-arrow-down"></i>
+                        <span class="sort-icons">
+                            <i class="fa fa-arrow-up {{ $sortBy === 'room_id' && $sortOrder === 'asc' ? 'active' : '' }}"></i>
+                            <i class="fa fa-arrow-down {{ $sortBy === 'room_id' && $sortOrder === 'desc' ? 'active' : '' }}"></i>
+                        </span>
                     </a>
                 </th>
                 <th>
                     <a href="{{ route('admin.rooms.index', ['sort_by' => 'roomNo', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
                         Số Phòng
-                        <i class="fa fa-arrow-up"></i>
-                        <i class="fa fa-arrow-down"></i>
+                        <span class="sort-icons">
+                            <i class="fa fa-arrow-up {{ $sortBy === 'roomNo' && $sortOrder === 'asc' ? 'active' : '' }}"></i>
+                            <i class="fa fa-arrow-down {{ $sortBy === 'roomNo' && $sortOrder === 'desc' ? 'active' : '' }}"></i>
+                        </span>
                     </a>
                 </th>
                 <th>
                     <a href="{{ route('admin.rooms.index', ['sort_by' => 'roomType_id', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
                         Loại Phòng
-                        <i class="fa fa-arrow-up"></i>
-                        <i class="fa fa-arrow-down"></i>
+                        <span class="sort-icons">
+                            <i class="fa fa-arrow-up {{ $sortBy === 'roomType_id' && $sortOrder === 'asc' ? 'active' : '' }}"></i>
+                            <i class="fa fa-arrow-down {{ $sortBy === 'roomType_id' && $sortOrder === 'desc' ? 'active' : '' }}"></i>
+                        </span>
                     </a>
                 </th>
                 <th>
                     <a href="{{ route('admin.rooms.index', ['sort_by' => 'status', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
                         Trạng Thái
-                        <i class="fa fa-arrow-up"></i>
-                        <i class="fa fa-arrow-down"></i>
+                        <span class="sort-icons">
+                            <i class="fa fa-arrow-up {{ $sortBy === 'status' && $sortOrder === 'asc' ? 'active' : '' }}"></i>
+                            <i class="fa fa-arrow-down {{ $sortBy === 'status' && $sortOrder === 'desc' ? 'active' : '' }}"></i>
+                        </span>
                     </a>
                 </th>
                 <th>
                     <a href="{{ route('admin.rooms.index', ['sort_by' => 'floor', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">
                         Tầng
-                        <i class="fa fa-arrow-up"></i>
-                        <i class="fa fa-arrow-down"></i>
+                        <span class="sort-icons">
+                            <i class="fa fa-arrow-up {{ $sortBy === 'floor' && $sortOrder === 'asc' ? 'active' : '' }}"></i>
+                            <i class="fa fa-arrow-down {{ $sortBy === 'floor' && $sortOrder === 'desc' ? 'active' : '' }}"></i>
+                        </span>
                     </a>
                 </th>
                 <th>Hành Động</th>
@@ -101,7 +111,7 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                
+
                                 <div class="mb-3">
                                     <label for="floor" class="form-label">Tầng</label>
                                     <input type="text" name="floor" class="form-control" value="{{ old('floor', $room->floor) }}">
@@ -116,8 +126,15 @@
                 </div>
             </div>
             @endforeach
+
         </tbody>
+
     </table>
+    <div class="pagination">
+        {{ $rooms->links() }}
+    </div>
+
+    
 </div>
 
 <!-- Modal Thêm Mới -->
@@ -143,7 +160,7 @@
                             @endforeach
                         </select>
                     </div>
-                   
+
                     <div class="mb-3">
                         <label for="floor" class="form-label">Tầng</label>
                         <input type="number" name="floor" class="form-control" value="{{ old('floor') }}">
@@ -273,6 +290,19 @@
 
     th a[aria-sort="descending"] i.fa-arrow-down {
         display: inline-block;
+    }
+
+    .sort-icons {
+        margin-left: 5px;
+    }
+
+    .sort-icons i {
+        font-size: 12px;
+        color: #ccc;
+    }
+
+    .sort-icons i.active {
+        color: #000;
     }
 </style>
 

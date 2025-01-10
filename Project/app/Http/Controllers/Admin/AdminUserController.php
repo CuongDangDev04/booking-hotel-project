@@ -12,11 +12,11 @@ class AdminUserController extends Controller
 {
     public function index(Request $request)
     {
-        $sortBy = $request->get('sort_by', 'name');
+        $sortBy = $request->get('sort_by', 'id');
         $sortOrder = $request->get('sort_order', 'asc');
 
-        $users = User::where('role', 'user')  // Lọc theo role = 'user'
-            ->orderBy($sortBy, $sortOrder)    // Sắp xếp theo các trường
+        $users = User::where('role', 'user')  
+            ->orderBy($sortBy, $sortOrder)    
             ->get();
 
         return view('admin.users.index', compact('users', 'sortBy', 'sortOrder'));

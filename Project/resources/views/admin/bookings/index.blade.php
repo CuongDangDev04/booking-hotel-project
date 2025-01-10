@@ -11,23 +11,31 @@
         <thead class="table-dark">
             <tr>
                 <th><a href="{{ route('admin.bookings.index', ['sort_by' => 'booking_id', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">ID
-                        <i class="fa fa-arrow-up"></i>
-                        <i class="fa fa-arrow-down"></i>
+                        <span class="sort-icons">
+                            <i class="fa fa-arrow-up {{ $sortBy === 'booking_id' && $sortOrder === 'asc' ? 'active' : '' }}"></i>
+                            <i class="fa fa-arrow-down {{ $sortBy === 'booking_id' && $sortOrder === 'desc' ? 'active' : '' }}"></i>
+                        </span>
                     </a></th>
                 <th>Tên Khách Hàng
 
                     </a></th>
                 <th><a href="{{ route('admin.bookings.index', ['sort_by' => 'room_id', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">Số phòng
-                        <i class="fa fa-arrow-up"></i>
-                        <i class="fa fa-arrow-down"></i>
+                        <span class="sort-icons">
+                            <i class="fa fa-arrow-up {{ $sortBy === 'room_id' && $sortOrder === 'asc' ? 'active' : '' }}"></i>
+                            <i class="fa fa-arrow-down {{ $sortBy === 'room_id' && $sortOrder === 'desc' ? 'active' : '' }}"></i>
+                        </span>
                     </a></th>
                 <th><a href="{{ route('admin.bookings.index', ['sort_by' => 'checkin', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">Ngày Nhận Phòng
-                        <i class="fa fa-arrow-up"></i>
-                        <i class="fa fa-arrow-down"></i>
+                        <span class="sort-icons">
+                            <i class="fa fa-arrow-up {{ $sortBy === 'checkin' && $sortOrder === 'asc' ? 'active' : '' }}"></i>
+                            <i class="fa fa-arrow-down {{ $sortBy === 'checkin' && $sortOrder === 'desc' ? 'active' : '' }}"></i>
+                        </span>
                     </a></th>
                 <th><a href="{{ route('admin.bookings.index', ['sort_by' => 'checkout', 'sort_order' => $sortOrder === 'asc' ? 'desc' : 'asc']) }}">Ngày Trả Phòng
-                        <i class="fa fa-arrow-up"></i>
-                        <i class="fa fa-arrow-down"></i>
+                        <span class="sort-icons">
+                            <i class="fa fa-arrow-up {{ $sortBy === 'checkout' && $sortOrder === 'asc' ? 'active' : '' }}"></i>
+                            <i class="fa fa-arrow-down {{ $sortBy === 'checkout' && $sortOrder === 'desc' ? 'active' : '' }}"></i>
+                        </span>
                     </a></th>
                 <th><a>Số người
 
@@ -146,5 +154,17 @@
     .table-dark {
         background-color: #343a40;
         color: white;
+    }
+    .sort-icons {
+        margin-left: 5px;
+    }
+
+    .sort-icons i {
+        font-size: 12px;
+        color: #ccc;
+    }
+
+    .sort-icons i.active {
+        color: #000;
     }
 </style>
