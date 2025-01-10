@@ -10,12 +10,12 @@
        <div class="container-fluid page-header mb-5 p-0" style="background-image: url(img/carousel-1.jpg);">
            <div class="container-fluid page-header-inner py-5">
                <div class="container text-center pb-5">
-                   <h1 class="display-3 text-white mb-3 animated slideInDown">Rooms</h1>
+                   <h1 class="display-3 text-white mb-3 animated slideInDown">Phòng</h1>
                    <nav aria-label="breadcrumb">
                        <ol class="breadcrumb justify-content-center text-uppercase">
-                           <li class="breadcrumb-item"><a href="#">Home</a></li>
-                           <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                           <li class="breadcrumb-item text-white active" aria-current="page">Rooms</li>
+                           <li class="breadcrumb-item"><a href="/">Trang chủ</a></li>
+                           <li class="breadcrumb-item"><a href="#">Trang</a></li>
+                           <li class="breadcrumb-item text-white active" aria-current="page">Phòng</li>
                        </ol>
                    </nav>
                </div>
@@ -45,24 +45,24 @@
                                </div>
                                <div class="col-md-3">
                                    <select class="form-select" name="adults">
-                                       <option selected value="0">Adult</option>
-                                       <option value="1">Adult 1</option>
-                                       <option value="2">Adult 2</option>
-                                       <option value="3">Adult 3</option>
+                                       <option selected value="0">Người lớn</option>
+                                       <option value="1">1</option>
+                                       <option value="2">2</option>
+                                       <option value="3">3</option>
                                    </select>
                                </div>
                                <div class="col-md-3">
                                    <select class="form-select" name="children">
-                                       <option selected value="0">Child</option>
-                                       <option value="1">Child 1</option>
-                                       <option value="2">Child 2</option>
-                                       <option value="3">Child 3</option>
+                                       <option selected value="0">Trẻ em</option>
+                                       <option value="1">1</option>
+                                       <option value="2">2</option>
+                                       <option value="3">3</option>
                                    </select>
                                </div>
                            </div>
                        </div>
                        <div class="col-md-2">
-                           <button type="submit" class="btn btn-primary w-100">Submit</button>
+                           <button type="submit" class="btn btn-primary w-100">Tìm phòng</button>
                        </div>
                    </form>
                </div>
@@ -75,8 +75,7 @@
        <div class="container-xxl py-5">
            <div class="container">
                <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                   <h6 class="section-title text-center text-primary text-uppercase">Our Rooms</h6>
-                   <h1 class="mb-5">Explore Our <span class="text-primary text-uppercase">Rooms</span></h1>
+                   <h6 class="section-title text-center text-primary text-uppercase">Phòng</h6>
                </div>
 
                <div class="row g-4">
@@ -85,7 +84,7 @@
                        <div class="room-item shadow rounded overflow-hidden">
                            <div class="position-relative">
                                <img class="img-fluid" src="img/room-1.jpg" alt="">
-                               <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">{{$room->price}}/Day</small>
+                               <small class="position-absolute start-0 top-100 translate-middle-y bg-primary text-white rounded py-1 px-3 ms-4">{{$room->price}}/Ngày</small>
                            </div>
                            <div class="p-4 mt-2">
                                <div class="d-flex justify-content-between mb-3">
@@ -115,16 +114,28 @@
                    </div>
                    @endforeach
                </div>
+               <style>
+                   .prev-btn,
+                   .next-btn {
+                       min-width: 50px;
+                   }
+               </style>
                <div class="d-flex justify-content-center mt-4">
                    <ul class="pagination">
                        {{-- Nút Previous --}}
                        @if ($currentPage > 1)
                        <li class="page-item">
-                           <a class="page-link prev-btn" href="?page={{ $currentPage - 1 }}">Previous</a>
+                           <a class="page-link prev-btn" href="?page=1"><i class="fas fa-backward"></i></a>
+                       </li>
+                       <li class="page-item">
+                           <a class="page-link prev-btn" href="?page={{ $currentPage - 1 }}"><i class="fas fa-chevron-left"></i></a>
                        </li>
                        @else
                        <li class="page-item disabled">
-                           <span class="page-link prev-btn">Previous</span>
+                           <span class="page-link prev-btn"><i class="fas fa-backward"></i></span>
+                       </li>
+                       <li class="page-item disabled">
+                           <span class="page-link prev-btn"><i class="fas fa-chevron-left"></i></span>
                        </li>
                        @endif
 
@@ -138,11 +149,17 @@
                            {{-- Nút Next --}}
                            @if ($currentPage < $pages)
                                <li class="page-item">
-                               <a class="page-link next-btn" href="?page={{ $currentPage + 1 }}">Next</a>
+                               <a class="page-link next-btn" href="?page={{ $currentPage + 1 }}"><i class="fas fa-chevron-right"></i></a>
+                               </li>
+                               <li class="page-item">
+                                   <a class="page-link next-btn" href="?page={{ $pages }}"><i class="fas fa-forward"></i></a>
                                </li>
                                @else
                                <li class="page-item disabled">
-                                   <span class="page-link next-btn">Next</span>
+                                   <span class="page-link next-btn"><i class="fas fa-chevron-right"></i></span>
+                               </li>
+                               <li class="page-item disabled">
+                                   <span class="page-link next-btn"><i class="fas fa-forward"></i></span>
                                </li>
                                @endif
                    </ul>

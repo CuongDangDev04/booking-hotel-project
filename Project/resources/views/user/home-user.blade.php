@@ -69,24 +69,24 @@
                               </div>
                               <div class="col-md-3">
                                   <select class="form-select" name="adults">
-                                      <option selected value="0">Adult</option>
-                                      <option value="1">Adult 1</option>
-                                      <option value="2">Adult 2</option>
-                                      <option value="3">Adult 3</option>
+                                      <option selected value="0">Người lớn</option>
+                                      <option value="1">1</option>
+                                      <option value="2">2</option>
+                                      <option value="3">3</option>
                                   </select>
                               </div>
                               <div class="col-md-3">
                                   <select class="form-select" name="children">
-                                      <option selected value="0">Child</option>
-                                      <option value="1">Child 1</option>
-                                      <option value="2">Child 2</option>
-                                      <option value="3">Child 3</option>
+                                      <option selected value="0">Trẻ em</option>
+                                      <option value="1">1</option>
+                                      <option value="2">2</option>
+                                      <option value="3">3</option>
                                   </select>
                               </div>
                           </div>
                       </div>
                       <div class="col-md-2">
-                          <button type="submit" class="btn btn-primary w-100">Submit</button>
+                          <button type="submit" class="btn btn-primary w-100">Tìm phòng</button>
                       </div>
                   </form>
               </div>
@@ -332,51 +332,7 @@
 
 
       <!-- Team Start -->
-      <div class="container-xxl py-5">
-          <div class="container">
-              <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                  <h6 class="section-title text-center text-primary text-uppercase">Đội Ngũ Của Chúng Tôi</h6>
-                  <h1 class="mb-5">Explore Our <span class="text-primary text-uppercase">Staffs</span></h1>
-              </div>
-              <div class="row g-4">
-                  <div class="col-lg-3"></div>
-                  <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                      <div class="rounded shadow overflow-hidden">
-                          <div class="position-relative">
-                              <img class="img-fluid" src="img/team-3.jpg" alt="">
-                              <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                                  <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                  <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                  <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
-                              </div>
-                          </div>
-                          <div class="text-center p-4 mt-3">
-                              <h5 class="fw-bold mb-0">Full Name</h5>
-                              <small>Designation</small>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                      <div class="rounded shadow overflow-hidden">
-                          <div class="position-relative">
-                              <img class="img-fluid" src="img/team-4.jpg" alt="">
-                              <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
-                                  <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                  <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                  <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
-                              </div>
-                          </div>
-                          <div class="text-center p-4 mt-3">
-                              <h5 class="fw-bold mb-0">Full Name</h5>
-                              <small>Designation</small>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-lg-3"></div>
 
-              </div>
-          </div>
-      </div>
       <!-- Team End -->
 
 

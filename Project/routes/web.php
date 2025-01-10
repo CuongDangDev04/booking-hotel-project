@@ -12,11 +12,7 @@ use App\Http\Controllers\User\BookingController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\RoomController;
 use App\Models\Booking;
-use App\Models\Room;
-use App\Models\RoomType;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-use Monolog\Handler\RotatingFileHandler;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,7 +58,7 @@ Route::middleware('auth', 'check.active')->group(function () {
 });
 require __DIR__ . '/auth.php';
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'check.active'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/dashboard/user-info', [DashboardController::class, 'userInfo'])->name('dashboard.userInfo');
     Route::get('/dashboard/bookings', [DashboardController::class, 'bookings'])->name('dashboard.bookings');

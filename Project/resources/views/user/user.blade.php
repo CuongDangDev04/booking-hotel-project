@@ -78,8 +78,56 @@
     @include('partials.header-user')
 
     @yield('content')
+    <?php
+    $currentPage = url()->current();
+    ?>
+    @if (in_array($currentPage, [url('/'), url('/about')]))
+    <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h6 class="section-title text-center text-primary text-uppercase">Đội Ngũ Của Chúng Tôi</h6>
+                <h1 class="mb-5">Bao gồm các thanh viên<span class="text-primary text-uppercase"></span></h1>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="rounded shadow overflow-hidden">
+                        <div class="position-relative">
+                            <img class="img-fluid" src="img/team-3.jpg" alt="">
+                            <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
+                                <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center p-4 mt-3">
+                            <h5 class="fw-bold mb-0">Nguyễn Đại Nam</h5>
+                            <small>2200002525</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="rounded shadow overflow-hidden">
+                        <div class="position-relative">
+                            <img class="img-fluid" src="img/team-4.jpg" alt="">
+                            <div class="position-absolute start-50 top-100 translate-middle d-flex align-items-center">
+                                <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-square btn-primary mx-1" href=""><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                        <div class="text-center p-4 mt-3">
+                            <h5 class="fw-bold mb-0">Đặng Trần Quốc Cường</h5>
+                            <small>2200000447</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3"></div>
 
-
+            </div>
+        </div>
+    </div>
+    @endif
     @include('partials.footer-user')
 
 

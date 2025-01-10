@@ -56,11 +56,11 @@
                                  </a>
                                  <!-- Menu dropdown -->
                                  <ul class="dropdown-menu" style="right:0 !important;" aria-labelledby="navbarDropdown">
-                                     <li><a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Profile') }}</a></li>
+                                     <li><a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Trang Cá Nhân') }}</a></li>
                                      <li>
                                          <form method="POST" action="{{ route('logout') }}">
                                              @csrf
-                                             <button class="dropdown-item" type="submit">{{ __('Log Out') }}</button>
+                                             <button class="dropdown-item" type="submit">{{ __('Đăng Xuất') }}</button>
                                          </form>
                                      </li>
                                  </ul>
@@ -69,9 +69,9 @@
 
 
                          @else
-                         <a href="{{ route('login') }}" class="btn btn-link text-light">Log in</a>
+                         <a href="{{ route('login') }}" class="btn btn-link text-light">Đăng Nhập</a>
                          @if (Route::has('register'))
-                         <a href="{{ route('register') }}" class="ml-4 btn btn-link text-light">Register</a>
+                         <a href="{{ route('register') }}" class="ml-4 btn btn-link text-light">Đăng Ký</a>
                          @endif
                          @endauth
                      </div>
