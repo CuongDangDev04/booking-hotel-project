@@ -179,12 +179,12 @@ class BookingController extends Controller
             $amount = $receipt->totalAmount;
             // dump($receipt);
             $qrResponse = Http::post('https://api.vietqr.io/v2/generate', [
-                'accountNo' => 1027556071,
-                'accountName' => 'Nguyen Dai Nam',
-                'bankCode' => 'VCB',
+                'accountNo' => '0326626110',
+                'accountName' => 'NGUYEN DAI NAM',
+                'bankCode' => 'MB',
                 'amount' => intval($amount),
                 "addInfo" => "Thanh toán hóa đơn $receipt_id",
-                "acqId" => 970436,
+                "acqId" => 970422,
                 "template" => "compact",
             ]);
             // dd($qrResponse->json());
