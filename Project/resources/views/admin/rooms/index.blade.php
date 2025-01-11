@@ -134,7 +134,11 @@
         {{ $rooms->links() }}
     </div>
 
-    
+    <style>
+        .pagination .text-gray-700:first-child {
+            display: none !important;
+        }
+    </style>
 </div>
 
 <!-- Modal Thêm Mới -->
@@ -182,7 +186,7 @@
             text: 'Thao tác này không thể hoàn tác!',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Xóa',
+            confirmButtonText: 'Xác nhận',
             cancelButtonText: 'Hủy'
         }).then((result) => {
             if (result.isConfirmed) {

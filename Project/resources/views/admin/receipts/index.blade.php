@@ -86,8 +86,12 @@
             <div class="pagination">
                 {{ $receipts->links() }}
             </div>
+            <style>
+                .pagination .text-gray-700:first-child {
+                    display: none !important;
+                }
+            </style>
 
-           
         </div>
 
         <!-- Chi tiết hóa đơn -->
@@ -152,18 +156,18 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const deleteButtons = document.querySelectorAll('.delete-form button');
-        
+
         deleteButtons.forEach(button => {
             button.addEventListener('click', function(event) {
                 event.preventDefault();
-                
+
                 // Hiển thị SweetAlert xác nhận
                 Swal.fire({
                     title: 'Bạn có chắc chắn muốn xóa hóa đơn này?',
                     text: "Hành động này không thể hoàn tác!",
                     icon: 'warning',
                     showCancelButton: true,
-                    confirmButtonText: 'Xóa',
+                    confirmButtonText: 'Xác nhận',
                     cancelButtonText: 'Hủy'
                 }).then((result) => {
                     if (result.isConfirmed) {
@@ -210,6 +214,7 @@
     .pagination-wrapper {
         margin-top: 20px;
     }
+
     .sort-icons {
         margin-left: 5px;
     }

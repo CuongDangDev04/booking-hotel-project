@@ -157,6 +157,10 @@
                         @elseif ($receipt->status == 1) <span class="status">Đã thanh toán</span>
                         @else <span class="status">N/A</span> @endif
                     </p>
+                    @foreach ($receipt->bookings as $booking)
+                    <p><strong>Ngày nhận phòng: </strong>{{  \Carbon\Carbon::parse($booking->checkin)->format('d/m/Y') }}</p>
+                    <p><strong>Ngày trả phòng: </strong>{{  \Carbon\Carbon::parse($booking->checkout)->format('d/m/Y')}}</p>
+                    @endforeach
                 </div>
                 <div class="col-md-6 text-md-end">
                     <h3>Danh sách Booking</h3>
@@ -166,7 +170,6 @@
                                 <th>ID</th>
                                 <th>Khách hàng</th>
                                 <th>Phòng</th>
-                                <th>Giá</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -175,7 +178,6 @@
                                 <td>{{ $booking->booking_id }}</td>
                                 <td>{{ $booking->customer ? $booking->customer->firstName . ' ' . $booking->customer->lastName : 'N/A' }}</td>
                                 <td>{{ $booking->room->roomNo ?? 'N/A' }}</td>
-                                <td>{{ number_format($booking->totalPrice, 2) }} VND</td>
                             </tr>
                             @endforeach
                         </tbody>

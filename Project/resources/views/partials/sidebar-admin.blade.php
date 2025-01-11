@@ -1,54 +1,52 @@
 <div class="sidebar active">
     <div class="sidebar-logo">
-
     </div>
     <ul class="nav">
-       
         <li class="nav-item">
             <a href="users">
-                <i class="fas fa-users"></i>
+                <i class="fas fa-user-cog"></i>
                 <span>Quản lí người dùng</span>
             </a>
         </li>
         <li class="nav-item">
             <a href="rooms">
-                <i class="fas fa-users"></i>
+                <i class="fas fa-bed"></i>
                 <span>Quản lí phòng</span>
             </a>
         </li>
         <li class="nav-item">
             <a href="room-types">
-                <i class="far fa-chart-bar"></i>
+                <i class="fas fa-th-list"></i>
                 <span>Quản lí loại phòng</span>
             </a>
         </li>
         <li class="nav-item">
             <a href="bookings">
-                <i class="far fa-chart-bar"></i>
+                <i class="fas fa-calendar-check"></i>
                 <span>Quản lí đặt phòng</span>
             </a>
         </li>
         <li class="nav-item">
             <a href="services">
-                <i class="far fa-chart-bar"></i>
+                <i class="fas fa-concierge-bell"></i>
                 <span>Quản lí dịch vụ</span>
             </a>
         </li>
         <li class="nav-item">
             <a href="receipts">
-                <i class="far fa-chart-bar"></i>
+                <i class="fas fa-file-invoice"></i>
                 <span>Quản lí hóa đơn</span>
             </a>
         </li>
         <li class="nav-item">
             <a href="contacts">
-                <i class="far fa-chart-bar"></i>
+                <i class="fas fa-envelope"></i>
                 <span>Quản lí liên hệ</span>
             </a>
         </li>
-
-      
+    </ul>
 </div>
+
 <style>
     * {
         font-family: sans-serif;

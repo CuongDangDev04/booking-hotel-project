@@ -98,7 +98,11 @@
     <div class="pagination">
         {{ $contacts->links() }}
     </div>
-
+    <style>
+        .pagination .text-gray-700 {
+            display: none !important;
+        }
+    </style>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -111,7 +115,7 @@
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Xóa',
+            confirmButtonText: 'Xác nhận',
             cancelButtonText: 'Hủy'
         }).then((result) => {
             if (result.isConfirmed) {

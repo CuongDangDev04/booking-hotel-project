@@ -88,6 +88,11 @@
     <div class="pagination">
         {{ $services->links() }}
     </div>
+    <style>
+        .pagination .text-gray-700:first-child {
+            display: none !important;
+        }
+    </style>
 </div>
 
 <!-- Add Service Modal -->
@@ -126,7 +131,7 @@
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Xóa',
+            confirmButtonText: 'Xác nhận',
             cancelButtonText: 'Hủy'
         }).then((result) => {
             if (result.isConfirmed) {

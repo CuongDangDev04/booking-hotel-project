@@ -112,13 +112,18 @@
                 </div>
             </div>
             @endforeach
-            
+
 
         </tbody>
     </table>
     <div class="pagination">
-                {{ $bookings->links() }}
-            </div>
+        {{ $bookings->links() }}
+    </div>
+    <style>
+        .pagination .text-gray-700:first-child {
+            display: none !important;
+        }
+    </style>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -129,7 +134,7 @@
             text: 'Thao tác này không thể hoàn tác!',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Xóa',
+            confirmButtonText: 'Xác nhận',
             cancelButtonText: 'Hủy'
         }).then((result) => {
             if (result.isConfirmed) {

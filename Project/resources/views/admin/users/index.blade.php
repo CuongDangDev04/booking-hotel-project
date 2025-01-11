@@ -57,7 +57,16 @@
                 <td>{{ $user->id }}</td>
                 <td>{{ $user->name }}</td>
                 <td>{{ $user->email }}</td>
-                <td>{{ $user->role }}</td>
+                <td>
+                    @if($user->role === 'user')
+                    Người dùng
+                    @elseif($user->role === 'admin')
+                    Quản trị viên
+                    @else
+                    {{ ucfirst($user->role) }}
+                    @endif
+                </td>
+
                 <td style="width: 300px;">
                     <!-- Edit Button -->
                     <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal{{ $user->id }}">
@@ -77,9 +86,9 @@
                     <a href="{{ route('admin.users.toggleActiveStatus', $user->id) }}" class="btn btn-success btn-sm">Kích hoạt</a>
                     @endif
                 </td>
-                
+
             </tr>
-          
+
 
             <!-- Edit Modal -->
             <div class="modal fade" id="editUserModal{{ $user->id }}" tabindex="-1" aria-labelledby="editUserModalLabel{{ $user->id }}" aria-hidden="true">
@@ -126,12 +135,17 @@
                 </div>
             </div>
             @endforeach
-           
+
         </tbody>
     </table>
     <div class="pagination">
-                {{ $users->links() }}
-            </div>
+        {{ $users->links() }}
+    </div>
+    <style>
+        .pagination .text-gray-700:first-child {
+            display: none !important;
+        }
+    </style>
 </div>
 
 <!-- Create Modal -->

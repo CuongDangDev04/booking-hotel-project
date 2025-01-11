@@ -143,8 +143,13 @@
         </tbody>
     </table>
     <div class="pagination">
-                {{ $roomTypes->links() }}
-            </div>
+        {{ $roomTypes->links() }}
+    </div>
+    <style>
+        .pagination .text-gray-700:first-child {
+            display: none !important;
+        }
+    </style>
 </div>
 
 <!-- Create Modal -->
@@ -282,6 +287,7 @@
     th a[aria-sort="descending"] i.fa-arrow-down {
         display: inline-block;
     }
+
     .sort-icons {
         margin-left: 5px;
     }
@@ -304,7 +310,7 @@
             text: 'Thao tác này không thể hoàn tác!',
             icon: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Xóa',
+            confirmButtonText: 'Xác nhận',
             cancelButtonText: 'Hủy'
         }).then((result) => {
             if (result.isConfirmed) {

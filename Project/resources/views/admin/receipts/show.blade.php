@@ -27,6 +27,8 @@
                 <th>ID</th>
                 <th>Khách hàng</th>
                 <th>Phòng</th>
+                <th>Ngày nhận phòng</th>
+                <th>Ngày trả phòng</th>
                 <th>Giá</th>
             </tr>
         </thead>
@@ -36,6 +38,8 @@
                 <td>{{ $booking->booking_id }}</td>
                 <td>{{ $booking->customer ? $booking->customer->firstName . ' ' . $booking->customer->lastName : 'N/A' }}</td>
                 <td>{{ $booking->room->roomNo ?? 'N/A' }}</td>
+                <td>{{  \Carbon\Carbon::parse($booking->checkin)->format('d/m/Y') }}</td>
+                <td>{{  \Carbon\Carbon::parse($booking->checkout)->format('d/m/Y')}}</td>
                 <td>{{ number_format($booking->totalPrice, 2) }} VND</td>
             </tr>
             @endforeach
