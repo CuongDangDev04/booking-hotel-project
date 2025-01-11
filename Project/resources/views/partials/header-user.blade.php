@@ -54,9 +54,13 @@
                                      <i class="bi bi-chevron-down ms-2" id="dropdownIcon"></i>
 
                                  </a>
+
                                  <!-- Menu dropdown -->
                                  <ul class="dropdown-menu" style="right:0 !important;" aria-labelledby="navbarDropdown">
-                                     <li><a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Trang Cá Nhân') }}</a></li>
+                                     @if(Auth::user() -> role === 'admin')
+                                     <li><a class="dropdown-item " href="/admin/bookings">{{ __('Trang Quản Lý') }}</a></li>
+                                     @endif
+                                     <li><a class="dropdown-item " href="{{ route('profile.edit') }}">{{ __('Trang Cá Nhân') }}</a></li>
                                      <li>
                                          <form method="POST" action="{{ route('logout') }}">
                                              @csrf
@@ -65,6 +69,8 @@
                                      </li>
                                  </ul>
                              </li>
+
+
                          </ul>
 
 

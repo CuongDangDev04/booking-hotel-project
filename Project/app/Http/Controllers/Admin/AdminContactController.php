@@ -40,6 +40,6 @@ class AdminContactController extends Controller
         $contact = Contact::findOrFail($id);
         $contact->delete();
 
-        return redirect()->route('contacts.index')->with('success', 'Xóa liên hệ thành công!');
+        return redirect()->route('admin.contacts.index')->with('success', 'Xóa liên hệ thành công!');
     }
 }
