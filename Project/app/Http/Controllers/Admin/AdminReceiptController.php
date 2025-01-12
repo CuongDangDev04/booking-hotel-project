@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\PaymentSuccessMail;
 use App\Models\Receipt;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Illuminate\Support\Facades\Mail;
 use TCPDF;
 
 class AdminReceiptController extends Controller
@@ -63,8 +65,6 @@ class AdminReceiptController extends Controller
         // Khởi tạo đối tượng TCPDF
         $pdf = new TCPDF();
 
-
-
         // Thêm trang mới
         $pdf->AddPage();
 
@@ -76,6 +76,15 @@ class AdminReceiptController extends Controller
 
         // Viết nội dung HTML vào PDF
         $pdf->writeHTML($html);
+
+        // Lưu PDF vào bộ nhớ (chưa xuất file)
+        $pdfOutput = $pdf->output('', 'S'); // 'S' sẽ trả lại PDF dưới dạng chuỗi
+
+        // Gửi email kèm theo file PDF
+        // Giả sử bạn muốn gửi email cho khách hàng đầu tiên của hóa đơn
+        $email = $receipt->bookings->first()->customer->email;
+        
+        Mail::to($email)->send(new PaymentSuccessMail($receipt, $pdfOutput)); // Gửi email kèm file PDF
 
         // Xuất PDF và tải về
         return $pdf->Output('receipt_' . $id . '.pdf', 'D');

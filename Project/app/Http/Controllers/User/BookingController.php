@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Mail\PaymentSuccessMail;
 use App\Models\Booking;
 use App\Models\Customer;
 use App\Models\DetailReceipt;
@@ -12,7 +13,9 @@ use App\Models\Room;
 use App\Models\RoomType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use TCPDF;
 
 class BookingController extends Controller
 {
@@ -201,25 +204,49 @@ class BookingController extends Controller
         }
     }
 
+
     public function paymentSuccess(Request $request)
     {
         $receipt_id = $request->input('receipt_id');
         $paymentMethod = $request->input('paymentMethod');
-
+    
         $receipt = Receipt::find($receipt_id);
-
-        $payment = Payment::create([
-            'receipt_id' => $receipt_id,
-            'paymentDate' => date('Y-m-d'),
-            'paymentMethod' => $paymentMethod,
-            'status' => 1,
-        ]);
-
-        $receipt->status = 1;
-        $receipt->save();
-
+    
+        if ($receipt) {
+            $payment = Payment::create([
+                'receipt_id' => $receipt_id,
+                'paymentDate' => date('Y-m-d'),
+                'paymentMethod' => $paymentMethod,
+                'status' => 1,
+            ]);
+    
+            $receipt->status = 1;
+            $receipt->save();
+    
+            // Lấy khách hàng từ các booking liên quan đến receipt
+            $booking = $receipt->bookings->first(); // Giả sử lấy booking đầu tiên liên kết với receipt
+            if ($booking && $booking->customer) {
+                // Tạo PDF cho hóa đơn
+                $pdf = new TCPDF();
+                $pdf->AddPage();
+                $pdf->SetFont('dejavusans', '', 12);
+                $html = view('admin.receipts.pdf', compact('receipt'))->render();
+                $pdf->writeHTML($html);
+                $pdfOutput = $pdf->output('', 'S'); // 'S' sẽ trả về PDF dưới dạng chuỗi
+    
+                // Gửi email cho khách hàng với PDF đính kèm
+                Mail::to($booking->customer->email)->send(new PaymentSuccessMail($receipt, $pdfOutput));
+            } else {
+                // Nếu không tìm thấy khách hàng, xử lý lỗi
+                return redirect('/')->with('error', 'Không tìm thấy khách hàng cho hóa đơn này.');
+            }
+        } else {
+            // Xử lý trường hợp không tìm thấy hóa đơn
+            return redirect('/')->with('error', 'Không tìm thấy hóa đơn.');
+        }
+    
         $detailReceipt = DetailReceipt::where('receipt_id', $receipt_id)->get();
-
+    
         foreach ($detailReceipt as $detai) {
             $booking = Booking::find($detai->booking_id);
             if ($booking) {
@@ -227,10 +254,11 @@ class BookingController extends Controller
                 $booking->save();
             }
         }
-
-
+    
         return redirect('/')->with('success', 'Đặt phòng thành công! Hãy kiểm tra email của bạn để xem thông tin chi tiết.');
     }
+    
+
     public function cancelBooking($id)
     {
         $booking = Booking::findOrFail($id);
@@ -258,5 +286,28 @@ class BookingController extends Controller
         $booking->delete();
 
         return redirect()->route('dashboard.bookings');
+    }
+   public function sendPaymentSuccessEmail($id)
+    {
+        // Lấy thông tin hóa đơn
+        $receipt = Receipt::with(['bookings.customer', 'bookings.room', 'payment'])->findOrFail($id);
+
+        // Khởi tạo đối tượng TCPDF và tạo nội dung PDF
+        $pdf = new TCPDF();
+        $pdf->AddPage();
+        $pdf->SetFont('dejavusans', '', 12);
+
+        // Tạo nội dung HTML từ view và viết vào PDF
+        $html = view('admin.receipts.pdf', compact('receipt'))->render();
+        $pdf->writeHTML($html);
+
+        // Lưu file PDF vào bộ nhớ dưới dạng chuỗi
+        $pdfOutput = $pdf->output('', 'S'); // 'S' sẽ trả về dữ liệu PDF dưới dạng chuỗi
+
+        // Lấy email của khách hàng
+        $email = $receipt->bookings->first()->customer->email;
+
+        // Gửi email với file PDF đính kèm
+        Mail::to($email)->send(new PaymentSuccessMail($receipt, $pdfOutput)); // Gọi PaymentSuccessMail với 2 đối số
     }
 }
