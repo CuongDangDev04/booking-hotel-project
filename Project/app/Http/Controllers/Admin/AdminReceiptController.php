@@ -59,34 +59,24 @@ class AdminReceiptController extends Controller
 
     public function exportPDF($id)
     {
-        // Lấy hóa đơn và các thông tin liên quan
         $receipt = Receipt::with(['bookings.customer', 'bookings.room', 'payment'])->findOrFail($id);
 
-        // Khởi tạo đối tượng TCPDF
         $pdf = new TCPDF();
 
-        // Thêm trang mới
         $pdf->AddPage();
 
-        // Thiết lập font cho nội dung, sử dụng phông chữ Unicode để hỗ trợ tiếng Việt
         $pdf->SetFont('dejavusans', '', 12);
 
-        // Tạo nội dung HTML từ view
         $html = view('admin.receipts.pdf', compact('receipt'))->render();
 
-        // Viết nội dung HTML vào PDF
         $pdf->writeHTML($html);
 
-        // Lưu PDF vào bộ nhớ (chưa xuất file)
         $pdfOutput = $pdf->output('', 'S'); // 'S' sẽ trả lại PDF dưới dạng chuỗi
 
-        // Gửi email kèm theo file PDF
-        // Giả sử bạn muốn gửi email cho khách hàng đầu tiên của hóa đơn
         $email = $receipt->bookings->first()->customer->email;
         
-        Mail::to($email)->send(new PaymentSuccessMail($receipt, $pdfOutput)); // Gửi email kèm file PDF
+        Mail::to($email)->send(new PaymentSuccessMail($receipt, $pdfOutput));  
 
-        // Xuất PDF và tải về
         return $pdf->Output('receipt_' . $id . '.pdf', 'D');
     }
 }

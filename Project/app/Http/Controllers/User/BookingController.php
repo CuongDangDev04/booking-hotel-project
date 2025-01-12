@@ -289,25 +289,19 @@ class BookingController extends Controller
     }
    public function sendPaymentSuccessEmail($id)
     {
-        // Lấy thông tin hóa đơn
         $receipt = Receipt::with(['bookings.customer', 'bookings.room', 'payment'])->findOrFail($id);
 
-        // Khởi tạo đối tượng TCPDF và tạo nội dung PDF
         $pdf = new TCPDF();
         $pdf->AddPage();
         $pdf->SetFont('dejavusans', '', 12);
 
-        // Tạo nội dung HTML từ view và viết vào PDF
         $html = view('admin.receipts.pdf', compact('receipt'))->render();
         $pdf->writeHTML($html);
 
-        // Lưu file PDF vào bộ nhớ dưới dạng chuỗi
         $pdfOutput = $pdf->output('', 'S'); // 'S' sẽ trả về dữ liệu PDF dưới dạng chuỗi
 
-        // Lấy email của khách hàng
         $email = $receipt->bookings->first()->customer->email;
 
-        // Gửi email với file PDF đính kèm
         Mail::to($email)->send(new PaymentSuccessMail($receipt, $pdfOutput)); // Gọi PaymentSuccessMail với 2 đối số
     }
 }
