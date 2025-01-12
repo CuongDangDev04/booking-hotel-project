@@ -33,9 +33,9 @@
 
                            <div class="row g-2">
                                <div class="col-md-3">
-                                   <div class="date" id="date1" data-target-input="nearest">
+                                   <div class="date" id="" data-target-input="nearest">
                                        <input type="date" name="checkin" class="form-control datetimepicker-input"
-                                           placeholder="Check in" data-target="#date1" data-toggle="datetimepicker" min={{$today}} />
+                                           placeholder="Check in" data-target="#" data-toggle="datetimepicker" min={{$today}} />
                                    </div>
                                </div>
                                <div class="col-md-3">
