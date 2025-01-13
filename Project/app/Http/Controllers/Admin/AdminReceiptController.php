@@ -77,6 +77,6 @@ class AdminReceiptController extends Controller
         
         Mail::to($email)->send(new PaymentSuccessMail($receipt, $pdfOutput));  
 
-        return $pdf->Output('receipt_' . $id . '.pdf', 'D');
+        return $pdf->Output('hoadon_' . $id . '.pdf', 'D');
     }
 }
