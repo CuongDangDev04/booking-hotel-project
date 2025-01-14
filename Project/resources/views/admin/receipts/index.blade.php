@@ -63,7 +63,7 @@
                         </td>
                         <td>
                             @if ($receipt->bookings->isNotEmpty())
-                            {{ $receipt->bookings->first()->customer ? $receipt->bookings->first()->customer->firstName . ' ' . $receipt->bookings->first()->customer->lastName : 'N/A' }}
+                            {{ $receipt->bookings->first()->customer ? $receipt->bookings->first()->customer->lastName . ' ' . $receipt->bookings->first()->customer->firstName : 'N/A' }}
                             @else
                             N/A
                             @endif

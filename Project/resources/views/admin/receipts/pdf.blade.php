@@ -176,7 +176,7 @@
                             @foreach ($receipt->bookings as $booking)
                             <tr>
                                 <td>{{ $booking->booking_id }}</td>
-                                <td>{{ $booking->customer ? $booking->customer->firstName . ' ' . $booking->customer->lastName : 'N/A' }}</td>
+                                <td>{{ $booking->customer ? $booking->customer->lastName . ' ' . $booking->customer->firstName : 'N/A' }}</td>
                                 <td>{{ $booking->room->roomNo ?? 'N/A' }}</td>
                             </tr>
                             @endforeach

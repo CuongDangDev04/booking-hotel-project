@@ -1,5 +1,5 @@
 <nav class="navbar2" style="background-color: #0F172B">
-    <a href="" class="logo">
+    <a href="/" class="logo">
         <div class="row">
             <div class="logo d-flex justify-content-center ">
                 <p style="color:#FEA116 !important" class="text-primary  fs-1 fw-bold">HOTELIER</p>
