@@ -209,9 +209,9 @@ class BookingController extends Controller
     {
         $receipt_id = $request->input('receipt_id');
         $paymentMethod = $request->input('paymentMethod');
-    
+
         $receipt = Receipt::find($receipt_id);
-    
+
         if ($receipt) {
             $payment = Payment::create([
                 'receipt_id' => $receipt_id,
@@ -219,10 +219,10 @@ class BookingController extends Controller
                 'paymentMethod' => $paymentMethod,
                 'status' => 1,
             ]);
-    
+
             $receipt->status = 1;
             $receipt->save();
-    
+
             // Lấy khách hàng từ các booking liên quan đến receipt
             $booking = $receipt->bookings->first(); // Giả sử lấy booking đầu tiên liên kết với receipt
             if ($booking && $booking->customer) {
@@ -233,7 +233,7 @@ class BookingController extends Controller
                 $html = view('admin.receipts.pdf', compact('receipt'))->render();
                 $pdf->writeHTML($html);
                 $pdfOutput = $pdf->output('', 'S'); // 'S' sẽ trả về PDF dưới dạng chuỗi
-    
+
                 // Gửi email cho khách hàng với PDF đính kèm
                 Mail::to($booking->customer->email)->send(new PaymentSuccessMail($receipt, $pdfOutput));
             } else {
@@ -244,9 +244,9 @@ class BookingController extends Controller
             // Xử lý trường hợp không tìm thấy hóa đơn
             return redirect('/')->with('error', 'Không tìm thấy hóa đơn.');
         }
-    
+
         $detailReceipt = DetailReceipt::where('receipt_id', $receipt_id)->get();
-    
+
         foreach ($detailReceipt as $detai) {
             $booking = Booking::find($detai->booking_id);
             if ($booking) {
@@ -254,10 +254,10 @@ class BookingController extends Controller
                 $booking->save();
             }
         }
-    
+
         return redirect('/')->with('success', 'Đặt phòng thành công! Hãy kiểm tra email của bạn để xem thông tin chi tiết.');
     }
-    
+
 
     public function cancelBooking($id)
     {
@@ -287,7 +287,7 @@ class BookingController extends Controller
 
         return redirect()->route('dashboard.bookings');
     }
-   public function sendPaymentSuccessEmail($id)
+    public function sendPaymentSuccessEmail($id)
     {
         $receipt = Receipt::with(['bookings.customer', 'bookings.room', 'payment'])->findOrFail($id);
 
@@ -298,7 +298,7 @@ class BookingController extends Controller
         $html = view('admin.receipts.pdf', compact('receipt'))->render();
         $pdf->writeHTML($html);
 
-        $pdfOutput = $pdf->output('', 'S'); // 'S' sẽ trả về dữ liệu PDF dưới dạng chuỗi
+        $pdfOutput = $pdf->output('', 'S');
 
         $email = $receipt->bookings->first()->customer->email;
 
