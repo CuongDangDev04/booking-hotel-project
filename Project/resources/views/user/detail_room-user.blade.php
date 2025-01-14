@@ -1,4 +1,6 @@
 @extends('user.user')
+@section('title', 'Phòng')
+
 @section('content')
 <style>
     .carousel-item img {

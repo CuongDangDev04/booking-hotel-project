@@ -1,3 +1,4 @@
+@section('title','Đăng nhập')
 <x-guest-layout>
     <!-- Session Status -->
 

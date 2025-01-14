@@ -1,4 +1,5 @@
 @extends('user.user')
+@section('title', 'Thanh toán')
 @section('content')
 
 <style>

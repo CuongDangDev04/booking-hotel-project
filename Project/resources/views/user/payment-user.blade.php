@@ -1,4 +1,5 @@
 @extends('user.user')
+@section('title', 'Thông tin đặt phòng')
 @section('content')
 <style>
     .footer {
