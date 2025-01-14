@@ -103,15 +103,15 @@
                 <table class="room-info-table table table-bordered table-hover table-striped">
                     <tbody>
                         <tr>
-                            <td><strong>Price</strong></td>
-                            <td>${{ $roomType->price }}/Day</td>
+                            <td><strong>Giá</strong></td>
+                            <td>{{ $roomType->price }}VND/Ngày</td>
                         </tr>
                         <tr>
-                            <td><strong>Capacity</strong></td>
+                            <td><strong>Sức chứa</strong></td>
                             <td>{{ $roomType->occupancy }}</td>
                         </tr>
                         <tr>
-                            <td><strong>Available</strong></td>
+                            <td><strong>Khả dụng</strong></td>
                             <td>{{ $roomType->available ? 'Yes' : 'No' }}</td>
                         </tr>
                     </tbody>
@@ -151,24 +151,25 @@
                     @csrf <!-- Laravel CSRF token -->
                     <input type="hidden" name="room_id" value="{{$roomType->roomType_id}}">
                     <div class="mb-3">
-                        <label for="firstname" class="form-label">Tên</label>
-                        <input type="text" id="firstname" name="firstname" class="form-control" placeholder="Enter your firstname" value="{{ old('firstname') }}" require>
+                        <label for="lastname" class="form-label">Họ</label>
+                        <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Nhập họ đệm" value="{{ old('lastname') }}">
                     </div>
                     <div class="mb-3">
-                        <label for="lastname" class="form-label">Họ</label>
-                        <input type="text" id="lastname" name="lastname" class="form-control" placeholder="Enter your lastname" value="{{ old('lastname') }}">
+                        <label for="firstname" class="form-label">Tên</label>
+                        <input type="text" id="firstname" name="firstname" class="form-control" placeholder="Nhập tên" value="{{ old('firstname') }}" require>
                     </div>
+
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="text" id="email" name="email" class="form-control" placeholder="Enter your email" value="{{ old('email') }}" required>
+                        <input type="text" id="email" name="email" class="form-control" placeholder="Nhập email" value="{{ old('email') }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="form-label">Điện thoại</label>
-                        <input type="text" id="phone" name="phone" class="form-control" placeholder="Enter your phone" value="{{ old('phone') }}" required>
+                        <input type="text" id="phone" name="phone" class="form-control" placeholder="Nhập số điện thoại" value="{{ old('phone') }}" required>
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Địa chỉ</label>
-                        <input type="text" id="address" name="address" class="form-control" placeholder="Enter your address" value="{{ old('address') }}">
+                        <input type="text" id="address" name="address" class="form-control" placeholder="Nhập địa chỉ" value="{{ old('address') }}">
                     </div>
                     <div class="mb-3">
                         <label for="checkin" class="form-label">Ngày nhận phòng</label>
@@ -209,11 +210,11 @@
     </div>
     <div class="row mt-4">
         <div class="col-md-12">
-            <h3>Comments</h3>
+            <h3>Bình luận</h3>
             <form>
                 @csrf
                 <div class="mb-3">
-                    <label for="comment" class="form-label">Your Comment</label>
+                    <label for="comment" class="form-label">Bình luận của bạn</label>
                     <textarea id="comment" name="comment" class="form-control" rows="3" required></textarea>
                 </div>
                 <style>
@@ -243,7 +244,7 @@
                     }
                 </style>
                 <div class="mb-3">
-                    <label for="rating" class="form-label m-0">Rating</label>
+                    <label for="rating" class="form-label m-0">Đánh giá</label>
                     <div id="starRating" class="star-rating">
                         <span class="star star1" data-value="1">&#9733;</span>
                         <span class="star star2" data-value="2">&#9733;</span>
@@ -291,10 +292,10 @@
                         });
                     });
                 </script>
-                <button type="submit" class="btn btn-primary">Submit Comment</button>
+                <button type="submit" class="btn btn-primary">Gửi bình luận</button>
             </form>
             <div class="mt-4">
-                <h4>All Comments</h4>
+                <h4>Tất cả bình luận</h4>
                 <div class="card mb-3">
                     <div class="card-body">
                         <h5 class="card-title">Đại Nam</h5>
@@ -306,7 +307,7 @@
                             <span class="star-disable">&#9733;</span>
                         </div>
                         <p class="card-text">Địa điểm tuyệt vời, phòng ốc sạch sẽ</p>
-                        <p class="card-text"><small class="text-muted">Posted on 12/1/2025</small></p>
+                        <p class="card-text"><small class="text-muted">Đăng ngày 12/1/2025</small></p>
                     </div>
 
                 </div>
@@ -321,7 +322,7 @@
                             <span class="star-disable">&#9733;</span>
                         </div>
                         <p class="card-text">Cách âm hơi kém</p>
-                        <p class="card-text"><small class="text-muted">Posted on 12/1/2025</small></p>
+                        <p class="card-text"><small class="text-muted">Đăng ngày 12/1/2025</small></p>
                     </div>
                 </div>
             </div>
