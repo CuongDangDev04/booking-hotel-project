@@ -1,8 +1,8 @@
-# BookingHotel_Web
+# booking-hotel-project
 
 ## Giới thiệu dự án
 
-BookingHotel_Web là một ứng dụng web được xây dựng trên nền tảng Laravel, cho phép người dùng đặt phòng khách sạn trực tuyến. Dự án cung cấp các chức năng như tìm kiếm khách sạn, đặt phòng, quản lý đặt phòng, quản trị khách sạn và người dùng.
+booking-hotel-project là một ứng dụng web được xây dựng trên nền tảng Laravel, cho phép người dùng đặt phòng khách sạn trực tuyến. Dự án cung cấp các chức năng như tìm kiếm khách sạn, đặt phòng, quản lý đặt phòng, quản trị khách sạn và người dùng và thanh toán bằng VietQR.
 
 ## Tính năng chính
 
@@ -12,6 +12,7 @@ BookingHotel_Web là một ứng dụng web được xây dựng trên nền t�
 - Quản lý đặt phòng cho người dùng
 - Quản trị khách sạn, phòng, đơn đặt phòng (dành cho admin)
 - Giao diện thân thiện, dễ sử dụng
+- Thanh toán bằng VietQR
 
 ## Yêu cầu hệ thống
 
